@@ -4,6 +4,7 @@ sys.path.append(f'{os.getcwd()}/src')
 from raspberry_stereo.views.ViewIdle import ViewIdle
 from raspberry_stereo.views.ViewRegister import ViewRegister
 from raspberry_stereo.models.MainModel import Model
+import logging
 
 import tkinter, threading
 import PIL
