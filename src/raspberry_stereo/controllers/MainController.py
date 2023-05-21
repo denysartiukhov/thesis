@@ -3,7 +3,7 @@ import os
 sys.path.append(f'{os.getcwd()}/src')
 from raspberry_stereo.views.ViewIdle import ViewIdle
 from raspberry_stereo.views.ViewRegister import ViewRegister
-from raspberry_stereo.models.MainModel import Model
+from raspberry_stereo.models.MainModel import MainModel
 import logging
 
 import tkinter, threading
@@ -187,6 +187,8 @@ class MainController():
         frame_rate = 1
         prev = 0
         while True:
+            logging.debug("debug")
+            logging.info("info")
             time_elapsed = time.time() - prev
             mainImage = self.take_pic(self.mainCamera)
             sideImage = self.take_pic(self.sideCamera)
