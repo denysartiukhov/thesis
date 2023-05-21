@@ -8,7 +8,7 @@ import face_recognition
 import mediapipe as mp
 import numpy as np
 
-class Model():
+class MainModel():
     def __init__(self):
         self.new_face_encoding_temp = []
         self.known_face_encodings = []

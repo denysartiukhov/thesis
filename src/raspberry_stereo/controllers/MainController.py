@@ -16,7 +16,7 @@ import face_recognition
 import mediapipe as mp
 import numpy as np
 
-class Controller():
+class MainController():
     def __init__(self):
         self.learning_ongoing = False
         self.registration_ongoing = False
@@ -33,7 +33,7 @@ class Controller():
         self.root.geometry("800x480")
         #self.root.attributes('-fullscreen', True)
         self.root.protocol("WM_DELETE_WINDOW", self.close)
-        self.model = Model()
+        self.model = MainModel()
         self.viewIdle = ViewIdle(self.root)
         self.viewRegister = ViewRegister(self.root)
         
