@@ -5,6 +5,7 @@ from raspberry_stereo.views.ViewIdle import ViewIdle
 from raspberry_stereo.views.ViewRegister import ViewRegister
 from raspberry_stereo.models.MainModel import MainModel
 import logging
+import sqlite3
 
 import tkinter, threading
 import PIL
@@ -68,6 +69,7 @@ class MainController():
         self.viewRegister.yButton.bind('<Button>', lambda event: self.on_letter('Y'))
         self.viewRegister.zButton.bind('<Button>', lambda event: self.on_letter('Z'))
         self.viewRegister.backspaceButton.bind('<Button>', self.on_backspace)
+
         
         self.thread = threading.Thread(target=self.stream)
         self.thread.daemon = 1
@@ -86,8 +88,7 @@ class MainController():
     
     def complete_registration(self, event):
         text = self.viewRegister.faceNameText.get("1.0",tkinter.END)
-        self.model.known_face_names.append(text)
-        self.model.known_face_encodings.append(self.model.new_face_encoding_temp[0])
+        self.model.saveEncoding(text, self.model.new_face_encoding_temp[0])
         self.model.new_face_encoding_temp = []
         self.viewRegister.faceNameText.delete("1.0", tkinter.END)
         self.exit_registration(event)
@@ -187,8 +188,8 @@ class MainController():
         frame_rate = 1
         prev = 0
         while True:
-            logging.debug("debug")
-            logging.info("info")
+            #logging.debug("debug")
+            #logging.info("info")
             time_elapsed = time.time() - prev
             mainImage = self.take_pic(self.mainCamera)
             sideImage = self.take_pic(self.sideCamera)
@@ -202,15 +203,17 @@ class MainController():
                     face_names1, face_locations1 = self.find_faces(mainImage)
                     if face_names1 != [] and face_names1 != ["Unknown"] and face_names1:
                         if  len(face_names1) == 1 and len(face_names2) == 1 and face_names2 == face_names1:
+                            pose1 = self.estimate_pose(sideImage, 1)
+                            pose2 = self.estimate_pose(mainImage, 2)
                             self.greet(face_names1[0])
                 if self.registration_ongoing and self.learning_ongoing:
-                    pose = self.estimate_pose(sideImage, 1)
+                    pose = self.estimate_pose(sideImage, 3)
                     direction = self.estimate_direction(pose) if pose else None
                     if direction == "Straight":
-                        cv2.imwrite(f"./images/test.jpeg", sideImage)
+                        cv2.imwrite(f"./test.jpeg", sideImage)
                         self.learn_new_face()
                         self.viewRegister.learningCompletedLabel.place(x=580, y=100)
-                        print("Learing complete")
+                        logging.info("Learing complete")
                         self.learning_ongoing = False
                 prev = time.time()
                 
@@ -232,6 +235,11 @@ class MainController():
         self.viewRegister.faceNameText.insert(tkinter.END, text)
         
     def find_faces(self, image):
+        sqliteConnection = sqlite3.connect('raspberry.db')
+        cursor = sqliteConnection.cursor()
+        encodings, names = self.model.getEncodings(cursor)
+        encodings = np.array(encodings)
+        sqliteConnection.close()
         face_locations = []
         face_encodings = []
         face_names = []
@@ -245,14 +253,17 @@ class MainController():
 
         face_names = []
         for face_encoding in face_encodings:
-            matches = face_recognition.compare_faces(self.model.known_face_encodings, face_encoding)
+            matches = face_recognition.compare_faces(encodings, face_encoding)
             name = "Unknown"
             # Use the known face with the smallest distance to the new face
-            if not self.model.known_face_encodings == []:
-                face_distances = face_recognition.face_distance(self.model.known_face_encodings, face_encoding)
-                best_match_index = np.argmin(face_distances)
-                if matches[best_match_index]:
-                    name = self.model.known_face_names[best_match_index]
+            if not encodings == []:
+                face_distances = face_recognition.face_distance(encodings, face_encoding)
+                try:
+                    best_match_index = np.argmin(face_distances)
+                    if matches[best_match_index]:
+                        name = names[best_match_index]
+                except:
+                    pass
 
             face_names.append(name)
         
@@ -271,7 +282,7 @@ class MainController():
             #font = cv2.FONT_HERSHEY_DUPLEX
             #cv2.putText(image, name, (left + 6, bottom - 6), font, 1.0, (255, 255, 255), 1)
         if not face_names == []:
-            return face_names, face_locations
+            return face_names[0], face_locations
         else:
             return None, None
         
@@ -279,8 +290,10 @@ class MainController():
         some_image.flags.writeable = False
         if index == 1:
             results = self.model.face_mesh1.process(some_image)
-        else:
+        elif index == 2:
             results = self.model.face_mesh2.process(some_image)
+        else:
+            results = self.model.face_mesh3.process(some_image)
         some_image.flags.writeable = True
         img_h, img_w, img_c = some_image.shape
 
@@ -347,7 +360,7 @@ class MainController():
             return "Left"
     
     def learn_new_face(self):
-        obama_image = face_recognition.load_image_file("./images/test.jpeg")
+        obama_image = face_recognition.load_image_file("./test.jpeg")
         obama_face_encoding = face_recognition.face_encodings(obama_image)[0]
         self.model.new_face_encoding_temp = [obama_face_encoding]
         
