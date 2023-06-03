@@ -207,7 +207,7 @@ class MainController():
                             pose2 = self.estimate_pose(mainImage, 2)
                             if self.model.isCheckedIn(face_names1[0]):
                                 pass
-                                self.viewIdle.alreadyCheckedInLabel.place(x=0, y=50)
+                                self.viewIdle.alreadyCheckedInLabel.place(x=0, y=100)
                             else:
                                 self.model.checkIn(face_names1[0])
                                 name = self.model.getUserInfo(face_names1[0])
