@@ -294,10 +294,13 @@ class MainController():
         some_image.flags.writeable = False
         try:
             if index == 1:
+                print('1')
                 results = self.model.face_mesh1.process(some_image)
             elif index == 2:
+                print('2')
                 results = self.model.face_mesh2.process(some_image)
             else:
+                print('3')
                 results = self.model.face_mesh3.process(some_image)
             print('YES')
         except Exception as e:
