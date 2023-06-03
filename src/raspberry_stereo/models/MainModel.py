@@ -65,7 +65,8 @@ class MainModel():
     def getUserInfo(self, id):
         sqliteConnection = sqlite3.connect('raspberry.db')
         cursor = sqliteConnection.cursor()
-        print(id)
+        query = f"SELECT first_name FROM users WHERE id = '{id}';"
+        print(query)
         cursor.executescript(f"SELECT first_name FROM users WHERE id = '{id}';")
         rows = cursor.fetchall()
         print(rows)
