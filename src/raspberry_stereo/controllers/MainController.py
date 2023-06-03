@@ -195,7 +195,7 @@ class MainController():
             #logging.info("info")
             time_elapsed = time.time() - prev
             mainImage = self.take_pic(self.mainCamera)
-            sideImage = self.take_pic(self.sideCamera)
+            sideImage = self.take_pic(self.sideCamera)[0:0, 240:240]
             print(sideImage.shape)
             self.display_pic(self.viewIdle.mainCameraLabel,mainImage)
             self.display_pic(self.viewIdle.sideCameraLabel,sideImage)
