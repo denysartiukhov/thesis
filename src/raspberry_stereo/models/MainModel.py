@@ -63,12 +63,12 @@ class MainModel():
         logging.debug(f"User {id} checked in for the day.")
 
     def getUserInfo(self, id):
-        sqliteConnection = sqlite3.connect('raspberry.db')
-        cursor = sqliteConnection.cursor()
-        cursor.executescript(f"SELECT * FROM checked_in WHERE id = '{id}';")
-        rows = cursor.fetchall()
+        sqliteConnection1 = sqlite3.connect('raspberry.db')
+        cursor1 = sqliteConnection1.cursor()
+        cursor1.executescript(f"SELECT * FROM checked_in WHERE id = '{id}';")
+        rows = cursor1.fetchall()
         print(rows)
-        sqliteConnection.close()
+        sqliteConnection1.close()
         if len(rows) == 0:
             return None
         for row in rows:
