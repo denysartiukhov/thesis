@@ -194,7 +194,7 @@ class MainController():
             #logging.debug("debug")
             #logging.info("info")
             time_elapsed = time.time() - prev
-            mainImage = self.take_pic(self.mainCamera)
+            mainImage = self.take_pic(self.mainCamera)[0:480, 0:560]
             sideImage = self.take_pic(self.sideCamera)[0:240, 0:240]
             print(sideImage.shape)
             print(mainImage.shape)
