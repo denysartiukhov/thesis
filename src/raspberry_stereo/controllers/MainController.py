@@ -210,7 +210,8 @@ class MainController():
                                 #self.viewIdle.alreadyCheckedInLabel.place(x=0, y=50)
                             else:
                                 self.model.checkIn(face_names1[0])
-                                self.greet(face_names1[0])
+                                name = self.model.getUserInfo(face_names1[0])
+                                self.greet(name)
                 if self.registration_ongoing and self.learning_ongoing:
                     pose = self.estimate_pose(sideImage, 3)
                     direction = self.estimate_direction(pose) if pose else None

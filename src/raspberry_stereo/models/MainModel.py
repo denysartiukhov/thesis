@@ -30,8 +30,8 @@ class MainModel():
             self.cursor.executescript("CREATE TABLE users (id TEXT PRIMARY KEY, first_name TEXT NOT NULL, last_name TEXT NOT NULL)")
             self.cursor.executescript("CREATE TABLE checked_in (id TEXT PRIMARY KEY, check_in_date DATETIME DEFAULT CURRENT_TIMESTAMP)")
 
-            self.cursor.executescript(f"INSERT INTO users(id, first_name, last_name) VALUES('BISERA', 'Bisera', 'Nestorovska')")
-            self.cursor.executescript(f"INSERT INTO users(id, first_name, last_name) VALUES('DENYS', 'Denys', 'Artiukhov')")
+            self.cursor.executescript(f"INSERT INTO users(id, first_name, last_name) VALUES('B', 'Bisera', 'Nestorovska')")
+            self.cursor.executescript(f"INSERT INTO users(id, first_name, last_name) VALUES('D', 'Denys', 'Artiukhov')")
 
             logging.debug("Face encodings table does not exist, creating...")
         else:
@@ -61,6 +61,17 @@ class MainModel():
         cursor.executescript(f"INSERT INTO checked_in(id) VALUES('{id}')")
         sqliteConnection.close()
         logging.debug(f"User {id} checked in for the day.")
+
+    def getUserInfo(self, id):
+        sqliteConnection = sqlite3.connect('raspberry.db')
+        cursor = sqliteConnection.cursor()
+        cursor.executescript(f"SELECT first_name FROM users WHERE id = '{id}';")
+        rows = cursor.fetchall()
+        sqliteConnection.close()
+        if len(rows) == 0:
+            return None
+        for row in rows:
+            return row[0]
         
     def getEncodings(self, cursor):
         cursor.execute(f"SELECT * FROM faces;")
