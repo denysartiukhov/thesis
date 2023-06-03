@@ -26,7 +26,7 @@ class MainController():
         self.sideCamera = cv2.VideoCapture(0)
         self.mainCamera.set(3,640)  
         self.mainCamera.set(4,480)
-        self.sideCamera.set(3,240)
+        self.sideCamera.set(3,320)
         self.sideCamera.set(4,240)
         self.root = tkinter.Tk()
         self.root.title('Automated Check-In')
