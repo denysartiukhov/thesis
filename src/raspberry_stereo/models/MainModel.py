@@ -28,7 +28,7 @@ class MainModel():
         rows = self.cursor.fetchall()
         if len(rows) == 0:
             self.cursor.executescript("CREATE TABLE faces (id INTEGER PRIMARY KEY, name TEXT NOT NULL, encoding TEXT NOT NULL, creation_date DATETIME DEFAULT CURRENT_TIMESTAMP)")
-            self.cursor.executescript("CREATE TABLE checked-in (id INTEGER PRIMARY KEY, custom_id TEXT NOT NULL, check_in_date DATETIME DEFAULT CURRENT_TIMESTAMP)")
+            self.cursor.executescript("CREATE TABLE checked_in (id INTEGER PRIMARY KEY, custom_id TEXT NOT NULL, check_in_date DATETIME DEFAULT CURRENT_TIMESTAMP)")
             logging.debug("Face encodings table does not exist, creating...")
         else:
             logging.debug("Face encodings table already exists, nothing to do.")
@@ -39,7 +39,7 @@ class MainModel():
         logging.debug(f"Encoding for {name} saved to DB.")
 
     def checkIn(self, id):
-        self.cursor.executescript(f"INSERT INTO checked-in(id) VALUES('{id}')")
+        self.cursor.executescript(f"INSERT INTO checked_in(id) VALUES('{id}')")
         logging.debug(f"User {id} checked in for the day.")
         
     def getEncodings(self, cursor):
