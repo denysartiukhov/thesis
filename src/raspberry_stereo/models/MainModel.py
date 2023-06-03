@@ -27,7 +27,7 @@ class MainModel():
 
         rows = self.cursor.fetchall()
         if len(rows) == 0:
-            self.cursor.executescript("CREATE TABLE faces (id INTEGER PRIMARY KEY, name TEXT NOT NULL, encoding TEXT NOT NULL, creation_date DATETIME DEFAULT CURRENT_TIMESTAMP)")
+            self.cursor.executescript("CREATE TABLE faces (id TEXT PRIMARY KEY, encoding TEXT NOT NULL, creation_date DATETIME DEFAULT CURRENT_TIMESTAMP)")
             self.cursor.executescript("CREATE TABLE checked_in (id TEXT PRIMARY KEY, check_in_date DATETIME DEFAULT CURRENT_TIMESTAMP)")
             logging.debug("Face encodings table does not exist, creating...")
         else:
@@ -35,7 +35,7 @@ class MainModel():
 
         
     def saveEncoding(self, name, encoding):
-        self.cursor.executescript(f"INSERT INTO faces(name, encoding) VALUES('{name}', '{encoding}')")
+        self.cursor.executescript(f"INSERT INTO faces(id, encoding) VALUES('{name}', '{encoding}')")
         logging.debug(f"Encoding for {name} saved to DB.")
     
     def isCheckedIn(self, id):
@@ -65,9 +65,9 @@ class MainModel():
         if len(rows) == 0:
             return [], []
         for row in rows:
-            encodingsList = row[2].replace('[','').replace(']','').replace('\n','').split(' ')
+            encodingsList = row[1].replace('[','').replace(']','').replace('\n','').split(' ')
             encodingsList = [float(x) for x in encodingsList if x != '']
-            namesList = row[1].replace('[','').replace(']','').replace('\n','').split(' ')
+            namesList = row[0].replace('[','').replace(']','').replace('\n','').split(' ')
             namesList = [x for x in namesList if x != '']
             encodings.append(encodingsList)
             names.append(namesList)
