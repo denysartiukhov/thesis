@@ -292,6 +292,7 @@ class MainController():
             return None, None
         
     def estimate_pose(self,some_image, index):
+        results = None
         some_image.flags.writeable = False
         try:
             if index == 1:
