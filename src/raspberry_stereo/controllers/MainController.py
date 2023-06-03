@@ -187,6 +187,7 @@ class MainController():
     def stream(self):
         frame_rate = 1
         prev = 0
+        timer = 0
         while True:
             #logging.debug("debug")
             #logging.info("info")
@@ -207,9 +208,9 @@ class MainController():
                             pose2 = self.estimate_pose(mainImage, 2)
                             name = self.model.getUserInfo(face_names1[0])
                             if self.model.isCheckedIn(face_names1[0]):
-                                pass
                                 self.viewIdle.alreadyCheckedInLabel.config(text=f"{name} already checked id.")
                                 self.viewIdle.alreadyCheckedInLabel.place(x=0, y=101)
+                                timer = 1
                             else:
                                 self.model.checkIn(face_names1[0])
                                 self.greet(name)
@@ -223,6 +224,13 @@ class MainController():
                         logging.info("Learing complete")
                         self.learning_ongoing = False
                 prev = time.time()
+
+                if time > 0 and time < 40:
+                    time += 1
+                else:
+                    time = 0
+                    self.viewIdle.alreadyCheckedInLabel.place_forget()
+
                 
     def greet(self,name):
         self.hide_idle()
