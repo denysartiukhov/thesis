@@ -107,9 +107,9 @@ class MainController():
         self.draw_registration()
     
     def draw_idle(self):
-        self.viewIdle.mainCameraLabel.place(x=-61, y=0)
-        self.viewIdle.sideCameraLabel.place(x=580, y=120)
-        self.viewIdle.registerNewFaceButton.place(x=635, y=37)
+        self.viewIdle.mainCameraLabel.place(x=240, y=0)
+        self.viewIdle.sideCameraLabel.place(x=0, y=120)
+        self.viewIdle.registerNewFaceButton.place(x=65, y=37)
         
     def hide_idle(self):
         self.viewIdle.mainCameraLabel.place_forget()
@@ -191,8 +191,8 @@ class MainController():
             #logging.debug("debug")
             #logging.info("info")
             time_elapsed = time.time() - prev
-            mainImage = self.take_pic(self.mainCamera)
-            sideImage = self.take_pic(self.sideCamera)
+            mainImage = self.take_pic(self.mainCamera)[0:480, 0:560]
+            sideImage = self.take_pic(self.sideCamera)[0:240, 0:240]
             self.display_pic(self.viewIdle.mainCameraLabel,mainImage)
             self.display_pic(self.viewIdle.sideCameraLabel,sideImage)
             self.display_pic(self.viewRegister.sideCameraLabel,sideImage)
