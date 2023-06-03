@@ -368,6 +368,7 @@ class MainController():
         
     def take_pic(self,cam):
         success, image = cam.read()
+        image = image[0:240, 0:240]
         image = cv2.cvtColor(cv2.flip(image, 1), cv2.COLOR_BGR2RGB)
         image = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
         return image
