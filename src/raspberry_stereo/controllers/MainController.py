@@ -110,9 +110,9 @@ class MainController():
         #self.viewIdle.mainCameraLabel.place(x=-61, y=0)
         #self.viewIdle.sideCameraLabel.place(x=580, y=120)
         #self.viewIdle.registerNewFaceButton.place(x=635, y=37)
-        self.viewIdle.mainCameraLabel.place(x=0, y=0)
-        self.viewIdle.sideCameraLabel.place(x=560, y=120)
-        self.viewIdle.registerNewFaceButton.place(x=635, y=37)
+        self.viewIdle.mainCameraLabel.place(x=240, y=0)
+        self.viewIdle.sideCameraLabel.place(x=0, y=120)
+        #self.viewIdle.registerNewFaceButton.place(x=635, y=37)
         
     def hide_idle(self):
         self.viewIdle.mainCameraLabel.place_forget()
