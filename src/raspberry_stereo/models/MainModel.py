@@ -65,7 +65,7 @@ class MainModel():
     def getUserInfo(self, id):
         sqliteConnection1 = sqlite3.connect('raspberry.db')
         cursor1 = sqliteConnection1.cursor()
-        cursor1.executescript(f"SELECT * FROM checked_in WHERE id = '{id}';")
+        cursor1.executescript(f"SELECT * FROM sqlite_master;")
         rows = cursor1.fetchall()
         print(rows)
         sqliteConnection1.close()
