@@ -67,7 +67,7 @@ class MainModel():
         cursor = sqliteConnection.cursor()
         query = f"SELECT first_name FROM users WHERE id = '{id}';"
         print(query)
-        cursor.executescript(f"SELECT * FROM users WHERE id = '{id}';")
+        cursor.executescript(f"SELECT * FROM * WHERE id = '{id}';")
         rows = cursor.fetchall()
         print(rows)
         sqliteConnection.close()
