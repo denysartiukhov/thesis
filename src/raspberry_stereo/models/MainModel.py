@@ -23,7 +23,7 @@ class MainModel():
         self.sqliteConnection = sqlite3.connect('raspberry.db')
         self.cursor = self.sqliteConnection.cursor()
         
-        self.cursor.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='faces';")
+        #self.cursor.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='faces';")
 
         rows = self.cursor.fetchall()
         if len(rows) == 0:
@@ -34,9 +34,9 @@ class MainModel():
             logging.debug("Face encodings table already exists, nothing to do.")
 
         
-    def saveEncoding(self, name, encoding):
-        self.cursor.executescript(f"INSERT INTO faces(id, encoding) VALUES('{name}', '{encoding}')")
-        logging.debug(f"Encoding for {name} saved to DB.")
+    def saveEncoding(self, id, encoding):
+        self.cursor.executescript(f"INSERT INTO faces(id, encoding) VALUES('{id}', '{encoding}')")
+        logging.debug(f"Encoding for {id} saved to DB.")
     
     def isCheckedIn(self, id):
         sqliteConnection = sqlite3.connect('raspberry.db')
@@ -61,16 +61,16 @@ class MainModel():
     def getEncodings(self, cursor):
         cursor.execute(f"SELECT * FROM faces;")
         rows = cursor.fetchall()
-        encodings, names = [], []
+        encodings, ids = [], []
         if len(rows) == 0:
             return [], []
         for row in rows:
             encodingsList = row[1].replace('[','').replace(']','').replace('\n','').split(' ')
             encodingsList = [float(x) for x in encodingsList if x != '']
-            namesList = row[0].replace('[','').replace(']','').replace('\n','').split(' ')
-            namesList = [x for x in namesList if x != '']
+            idsList = row[0].replace('[','').replace(']','').replace('\n','').split(' ')
+            idsList = [x for x in idsList if x != '']
             encodings.append(encodingsList)
-            names.append(namesList)
+            ids.append(idsList)
         logging.debug(f"Encodings fetched from DB.")
-        return encodings, names
+        return encodings, ids
         
