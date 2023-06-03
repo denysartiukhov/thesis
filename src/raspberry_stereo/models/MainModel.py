@@ -28,7 +28,7 @@ class MainModel():
         rows = self.cursor.fetchall()
         if len(rows) == 0:
             self.cursor.executescript("CREATE TABLE faces (id INTEGER PRIMARY KEY, name TEXT NOT NULL, encoding TEXT NOT NULL, creation_date DATETIME DEFAULT CURRENT_TIMESTAMP)")
-            self.cursor.executescript("CREATE TABLE checked_in (id INTEGER PRIMARY KEY, custom_id TEXT NOT NULL, check_in_date DATETIME DEFAULT CURRENT_TIMESTAMP)")
+            self.cursor.executescript("CREATE TABLE checked_in (id TEXT PRIMARY KEY, check_in_date DATETIME DEFAULT CURRENT_TIMESTAMP)")
             logging.debug("Face encodings table does not exist, creating...")
         else:
             logging.debug("Face encodings table already exists, nothing to do.")
@@ -41,7 +41,7 @@ class MainModel():
     def checkIn(self, id):
         sqliteConnection = sqlite3.connect('raspberry.db')
         cursor = sqliteConnection.cursor()
-        cursor.executescript(f"INSERT INTO checked_in(custom_id) VALUES('{id}')")
+        cursor.executescript(f"INSERT INTO checked_in(id) VALUES('{id}')")
         sqliteConnection.close()
         logging.debug(f"User {id} checked in for the day.")
         
