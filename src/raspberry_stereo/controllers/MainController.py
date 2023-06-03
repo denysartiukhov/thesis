@@ -206,7 +206,7 @@ class MainController():
                             pose1 = self.estimate_pose(sideImage, 1)
                             pose2 = self.estimate_pose(mainImage, 2)
                             if self.model.isCheckedIn(face_names1[0]):
-                                self.viewIdle.alreadyCheckedInLabel.place(x=580, y=100)
+                                self.viewIdle.alreadyCheckedInLabel.place(x=0, y=50)
                             else:
                                 self.model.checkIn(face_names1[0])
                                 self.greet(face_names1[0])
