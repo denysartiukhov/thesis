@@ -293,12 +293,16 @@ class MainController():
         
     def estimate_pose(self,some_image, index):
         some_image.flags.writeable = False
-        if index == 1:
-            results = self.model.face_mesh1.process(some_image)
-        elif index == 2:
-            results = self.model.face_mesh2.process(some_image)
-        else:
-            results = self.model.face_mesh3.process(some_image)
+        try:
+            if index == 1:
+                results = self.model.face_mesh1.process(some_image)
+            elif index == 2:
+                results = self.model.face_mesh2.process(some_image)
+            else:
+                results = self.model.face_mesh3.process(some_image)
+        except Exception as e:
+            print("Oooops")
+        print('YES')
         some_image.flags.writeable = True
         img_h, img_w, img_c = some_image.shape
 
