@@ -191,10 +191,10 @@ class MainController():
             #logging.debug("debug")
             #logging.info("info")
             time_elapsed = time.time() - prev
-            #mainImage = self.take_pic(self.mainCamera)[0:480, 0:560]
-            #sideImage = self.take_pic(self.sideCamera)[0:240, 0:240]
-            mainImage = self.take_pic(self.mainCamera)
-            sideImage = self.take_pic(self.sideCamera)
+            mainImage = self.take_pic(self.mainCamera)[0:480, 0:560]
+            sideImage = self.take_pic(self.sideCamera)[0:240, 0:240]
+            #mainImage = self.take_pic(self.mainCamera)
+            #sideImage = self.take_pic(self.sideCamera)
             self.display_pic(self.viewIdle.mainCameraLabel,mainImage)
             self.display_pic(self.viewIdle.sideCameraLabel,sideImage)
             self.display_pic(self.viewRegister.sideCameraLabel,sideImage)
@@ -368,7 +368,6 @@ class MainController():
         
     def take_pic(self,cam):
         success, image = cam.read()
-        image = image[0:480, 0:560]
         image = cv2.cvtColor(cv2.flip(image, 1), cv2.COLOR_BGR2RGB)
         image = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
         return image
