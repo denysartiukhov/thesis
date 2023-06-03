@@ -196,7 +196,7 @@ class MainController():
             time_elapsed = time.time() - prev
             mainImage = self.take_pic(self.mainCamera)
             sideImage = self.take_pic(self.sideCamera)
-            print(sideCamera.shape)
+            print(sideImage.shape)
             self.display_pic(self.viewIdle.mainCameraLabel,mainImage)
             self.display_pic(self.viewIdle.sideCameraLabel,sideImage)
             self.display_pic(self.viewRegister.sideCameraLabel,sideImage)
