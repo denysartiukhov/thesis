@@ -23,6 +23,7 @@ class MainModel():
         self.sqliteConnection = sqlite3.connect('raspberry.db')
         self.cursor = self.sqliteConnection.cursor()
 
+        self.cursor.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='faces';")
         rows = self.cursor.fetchall()
         if len(rows) == 0:
             self.cursor.executescript("CREATE TABLE faces (id TEXT PRIMARY KEY, encoding TEXT NOT NULL, creation_date DATETIME DEFAULT CURRENT_TIMESTAMP)")
