@@ -28,8 +28,8 @@ class MainModel():
             self.cursor.executescript("CREATE TABLE faces (id TEXT PRIMARY KEY, encoding TEXT NOT NULL, first_name TEXT NOT NULL, last_name TEXT NOT NULL, creation_date DATETIME DEFAULT CURRENT_TIMESTAMP)")
             self.cursor.executescript("CREATE TABLE checked_in (id TEXT PRIMARY KEY, check_in_date DATETIME DEFAULT CURRENT_TIMESTAMP)")
 
-            self.cursor.executescript(f"INSERT INTO faces(id, first_name, last_name) VALUES('BISERA', 'Bisera', 'Nestorovska)")
-            self.cursor.executescript(f"INSERT INTO faces(id, first_name, last_name) VALUES('DENYS', 'Denys', 'Artiukhov)")
+            self.cursor.executescript(f"INSERT INTO faces(id, first_name, last_name) VALUES('BISERA', 'Bisera', 'Nestorovska')")
+            self.cursor.executescript(f"INSERT INTO faces(id, first_name, last_name) VALUES('DENYS', 'Denys', 'Artiukhov')")
 
             logging.debug("Face encodings table does not exist, creating...")
         else:
