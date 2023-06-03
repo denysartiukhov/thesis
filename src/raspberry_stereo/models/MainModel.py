@@ -43,7 +43,7 @@ class MainModel():
         cursor = sqliteConnection.cursor()
         cursor.execute(f"SELECT * FROM checked_in WHERE id = '{id}';")
         rows = cursor.fetchall()
-        if len(rows) != 0:
+        if len(rows) == 0:
             cursor.executescript(f"INSERT INTO checked_in(id) VALUES('{id}')")
         else:
             print('Already checked in')
