@@ -197,6 +197,7 @@ class MainController():
             mainImage = self.take_pic(self.mainCamera)
             sideImage = self.take_pic(self.sideCamera)[0:240, 0:240]
             print(sideImage.shape)
+            print(mainImage.shape)
             self.display_pic(self.viewIdle.mainCameraLabel,mainImage)
             self.display_pic(self.viewIdle.sideCameraLabel,sideImage)
             self.display_pic(self.viewRegister.sideCameraLabel,sideImage)
