@@ -37,6 +37,10 @@ class MainModel():
     def saveEncoding(self, name, encoding):
         self.cursor.executescript(f"INSERT INTO faces(name, encoding) VALUES('{name}', '{encoding}')")
         logging.debug(f"Encoding for {name} saved to DB.")
+
+    def checkIn(self, id):
+        self.cursor.executescript(f"INSERT INTO checked-in(id) VALUES('{id}')")
+        logging.debug(f"User {id} checked in for the day.")
         
     def getEncodings(self, cursor):
         cursor.execute(f"SELECT * FROM faces;")
