@@ -41,7 +41,7 @@ class MainModel():
     def checkIn(self, id):
         sqliteConnection = sqlite3.connect('raspberry.db')
         cursor = sqliteConnection.cursor()
-        cursor.execute(f"SELECT * FROM checker_in WHERE id = '{id}';")
+        cursor.execute(f"SELECT * FROM checked_in WHERE id = '{id}';")
         print(rows)
         cursor.executescript(f"INSERT INTO checked_in(id) VALUES('{id}')")
         sqliteConnection.close()
