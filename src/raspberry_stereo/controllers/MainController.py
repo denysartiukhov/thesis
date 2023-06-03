@@ -225,10 +225,10 @@ class MainController():
                         self.learning_ongoing = False
                 prev = time.time()
 
-                if time > 0 and time < 40:
-                    time += 1
+                if timer > 0 and timer < 40:
+                    timer += 1
                 else:
-                    time = 0
+                    timer = 0
                     self.viewIdle.alreadyCheckedInLabel.place_forget()
 
                 
