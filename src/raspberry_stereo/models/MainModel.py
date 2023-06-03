@@ -37,16 +37,24 @@ class MainModel():
     def saveEncoding(self, name, encoding):
         self.cursor.executescript(f"INSERT INTO faces(name, encoding) VALUES('{name}', '{encoding}')")
         logging.debug(f"Encoding for {name} saved to DB.")
-
-    def checkIn(self, id):
+    
+    def isCheckedIn(self, id):
         sqliteConnection = sqlite3.connect('raspberry.db')
         cursor = sqliteConnection.cursor()
         cursor.execute(f"SELECT * FROM checked_in WHERE id = '{id}';")
         rows = cursor.fetchall()
+        sqliteConnection.close()
         if len(rows) == 0:
-            cursor.executescript(f"INSERT INTO checked_in(id) VALUES('{id}')")
+            print('Checking in...')
+            return False
         else:
             print('Already checked in')
+            return True
+
+    def checkIn(self, id):
+        sqliteConnection = sqlite3.connect('raspberry.db')
+        cursor = sqliteConnection.cursor()
+        cursor.executescript(f"INSERT INTO checked_in(id) VALUES('{id}')")
         sqliteConnection.close()
         logging.debug(f"User {id} checked in for the day.")
         

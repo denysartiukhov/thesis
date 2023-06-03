@@ -205,8 +205,11 @@ class MainController():
                         if  len(face_names1) == 1 and len(face_names2) == 1 and face_names2 == face_names1:
                             pose1 = self.estimate_pose(sideImage, 1)
                             pose2 = self.estimate_pose(mainImage, 2)
-                            self.model.checkIn(face_names1[0])
-                            self.greet(face_names1[0])
+                            if self.model.isCheckedIn(face_names1[0]):
+                                pass
+                            else:
+                                self.model.checkIn(face_names1[0])
+                                self.greet(face_names1[0])
                 if self.registration_ongoing and self.learning_ongoing:
                     pose = self.estimate_pose(sideImage, 3)
                     direction = self.estimate_direction(pose) if pose else None
