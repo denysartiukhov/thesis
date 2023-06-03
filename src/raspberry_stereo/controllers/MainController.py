@@ -205,12 +205,13 @@ class MainController():
                         if  len(face_names1) == 1 and len(face_names2) == 1 and face_names2 == face_names1:
                             pose1 = self.estimate_pose(sideImage, 1)
                             pose2 = self.estimate_pose(mainImage, 2)
+                            name = self.model.getUserInfo(face_names1[0])
                             if self.model.isCheckedIn(face_names1[0]):
                                 pass
+                                self.viewIdle.alreadyCheckedInLabel.config(text=f"{name} already checked id.")
                                 self.viewIdle.alreadyCheckedInLabel.place(x=0, y=101)
                             else:
                                 self.model.checkIn(face_names1[0])
-                                name = self.model.getUserInfo(face_names1[0])
                                 self.greet(name)
                 if self.registration_ongoing and self.learning_ongoing:
                     pose = self.estimate_pose(sideImage, 3)
