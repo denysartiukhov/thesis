@@ -226,7 +226,7 @@ class MainController():
                 prev = time.time()
 
                 print(timer)
-                if timer > 0 and timer < 40:
+                if timer > 0 and timer < 10:
                     timer += 1
                 else:
                     timer = 0
