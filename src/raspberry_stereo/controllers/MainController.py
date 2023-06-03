@@ -196,8 +196,6 @@ class MainController():
             time_elapsed = time.time() - prev
             mainImage = self.take_pic(self.mainCamera)[0:480, 0:560]
             sideImage = self.take_pic(self.sideCamera)[0:240, 0:240]
-            print(sideImage.shape)
-            print(mainImage.shape)
             self.display_pic(self.viewIdle.mainCameraLabel,mainImage)
             self.display_pic(self.viewIdle.sideCameraLabel,sideImage)
             self.display_pic(self.viewRegister.sideCameraLabel,sideImage)
@@ -301,9 +299,9 @@ class MainController():
                 results = self.model.face_mesh2.process(some_image)
             else:
                 results = self.model.face_mesh3.process(some_image)
+            print('YES')
         except Exception as e:
             print("Oooops")
-        print('YES')
         some_image.flags.writeable = True
         img_h, img_w, img_c = some_image.shape
 
