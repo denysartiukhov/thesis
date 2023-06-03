@@ -191,8 +191,8 @@ class MainController():
             #logging.debug("debug")
             #logging.info("info")
             time_elapsed = time.time() - prev
-            mainImage = self.take_pic(self.mainCamera)[0:480, 0:560]
-            sideImage = self.take_pic(self.sideCamera)[0:240, 0:240]
+            mainImage = self.take_pic(self.mainCamera,480,560)
+            sideImage = self.take_pic(self.sideCamera,240,240)
             #mainImage = self.take_pic(self.mainCamera)
             #sideImage = self.take_pic(self.sideCamera)
             self.display_pic(self.viewIdle.mainCameraLabel,mainImage)
@@ -366,8 +366,9 @@ class MainController():
         obama_face_encoding = face_recognition.face_encodings(obama_image)[0]
         self.model.new_face_encoding_temp = [obama_face_encoding]
         
-    def take_pic(self,cam):
+    def take_pic(self,cam,x,y):
         success, image = cam.read()
+        image = image[0:x, 0:y]
         image = cv2.cvtColor(cv2.flip(image, 1), cv2.COLOR_BGR2RGB)
         image = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
         return image
