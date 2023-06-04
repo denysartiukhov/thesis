@@ -426,7 +426,7 @@ class MainController():
             return "Left"
     
     def learn_new_face(self):
-        obama_image = face_recognition.load_image_file("./test.jpeg")
+        obama_image = face_recognition.load_image_file("./test.jpeg", mode='L')
         obama_face_encoding = face_recognition.face_encodings(obama_image)[0]
         self.model.new_face_encoding_temp = [obama_face_encoding]
         
