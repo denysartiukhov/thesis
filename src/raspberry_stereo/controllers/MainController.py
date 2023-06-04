@@ -386,10 +386,13 @@ class MainController():
     
     def estimate_direction(self,pose_estimate):
         if float(pose_estimate[0]) > -15 and float(pose_estimate[0]) < 15 and float(pose_estimate[1]) > -10 and float(pose_estimate[1]) < 10:
+            print("Straight")
             return "Straight"
         elif float(pose_estimate[0]) > -15 and float(pose_estimate[0]) < 15 and float(pose_estimate[1]) < -10:
+            print("Right")
             return "Right"
         elif float(pose_estimate[0]) > -15 and float(pose_estimate[0]) < 15 and float(pose_estimate[1]) > 10:
+            print("Left")
             return "Left"
     
     def learn_new_face(self):
