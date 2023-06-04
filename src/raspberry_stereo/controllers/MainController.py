@@ -227,9 +227,11 @@ class MainController():
             #logging.info("info")
             time_elapsed = time.time() - prev
             mainImage = cv2.imread("/home/dartiukhov/Desktop/thesis_clean/thesis/far_straight1_c2.jpg")
-            #mainImage = self.take_pic(self.mainCamera,480,yMain)
             sideImage = cv2.imread("/home/dartiukhov/Desktop/thesis_clean/thesis/far_straight2_c1.jpg")
             registerImage = cv2.imread("/home/dartiukhov/Desktop/thesis_clean/thesis/far_straight2_c1.jpg")
+            mainImage = cv2.imread("/home/dartiukhov/Desktop/thesis_clean/thesis/set2/Bisera/bright/JPEGs/far_straight1.jpg")
+            sideImage = cv2.imread("/home/dartiukhov/Desktop/thesis_clean/thesis/set2/Bisera/bright/JPEGs/far_straight2.jpg")
+            registerImage = cv2.imread("/home/dartiukhov/Desktop/thesis_clean/thesis/set2/Bisera/bright/JPEGs/far_straight2.jpg")
             self.show_checked_in_list()
             self.display_pic(self.viewIdle.mainCameraLabel,mainImage)
             self.display_pic(self.viewIdle.sideCameraLabel,sideImage)
