@@ -293,11 +293,8 @@ class MainController():
         self.viewRegister.faceNameText.insert(tkinter.END, text)
         
     def find_faces(self, image):
-        sqliteConnection = sqlite3.connect('raspberry.db')
-        cursor = sqliteConnection.cursor()
         encodings, names = self.model.getEncodings(cursor)
         encodings = np.array(encodings)
-        sqliteConnection.close()
         face_locations = []
         face_encodings = []
         face_names = []

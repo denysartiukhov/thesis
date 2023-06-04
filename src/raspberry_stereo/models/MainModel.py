@@ -73,9 +73,12 @@ class MainModel():
         for row in rows:
             return row[0]
         
-    def getEncodings(self, cursor):
+    def getEncodings(self):
+        sqliteConnection = sqlite3.connect('raspberry.db')
+        cursor = sqliteConnection.cursor()
         cursor.execute(f"SELECT * FROM faces;")
         rows = cursor.fetchall()
+        sqliteConnection.close()
         encodings, ids = [], []
         if len(rows) == 0:
             return [], []
