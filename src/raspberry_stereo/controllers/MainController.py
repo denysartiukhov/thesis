@@ -293,7 +293,7 @@ class MainController():
         self.viewRegister.faceNameText.insert(tkinter.END, text)
         
     def find_faces(self, image):
-        encodings, names = self.model.getEncodings(cursor)
+        encodings, names = self.model.getEncodings()
         encodings = np.array(encodings)
         face_locations = []
         face_encodings = []
