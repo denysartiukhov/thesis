@@ -99,4 +99,4 @@ class MainModel():
         for row in rows:
             user_name_list += row[0]
             user_name_list += "\n"
-        print(user_name_list)
+        #print(user_name_list)
