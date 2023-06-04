@@ -92,7 +92,7 @@ class MainModel():
     def get_checked_in_users(self):
         sqliteConnection = sqlite3.connect('raspberry.db')
         cursor = sqliteConnection.cursor()
-        cursor.execute(f"SELECT first_name FROM checked_in;")
+        cursor.execute(f"SELECT id FROM checked_in;")
         rows = cursor.fetchall()
         user_name_list = ""
         for row in rows:
