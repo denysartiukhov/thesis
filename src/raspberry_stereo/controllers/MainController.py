@@ -199,7 +199,7 @@ class MainController():
             mainImage = cv2.imread("/home/dartiukhov/Desktop/thesis_clean/thesis/close_straight1_c.jpg")
             #mainImage = self.take_pic(self.mainCamera,480,yMain)
             sideImage = cv2.imread("/home/dartiukhov/Desktop/thesis_clean/thesis/close_straight2_c.jpg")
-            registerImage = cv2.imread("/home/dartiukhov/Desktop/thesis_clean/thesis/set1/JPGs/D_bright.jpg")
+            registerImage = cv2.imread("/home/dartiukhov/Desktop/thesis_clean/thesis/close_straight2_c.jpg")
             self.show_checked_in_list()
             self.display_pic(self.viewIdle.mainCameraLabel,mainImage)
             self.display_pic(self.viewIdle.sideCameraLabel,sideImage)
@@ -389,15 +389,7 @@ class MainController():
                 return tuple([x, y])
     
     def estimate_direction(self,pose_estimate):
-        if float(pose_estimate[0]) > -15 and float(pose_estimate[0]) < 15 and float(pose_estimate[1]) > -10 and float(pose_estimate[1]) < 10:
             print("Straight")
-            return "Straight"
-        elif float(pose_estimate[0]) > -15 and float(pose_estimate[0]) < 15 and float(pose_estimate[1]) < -10:
-            print("Right")
-            return "Right"
-        elif float(pose_estimate[0]) > -15 and float(pose_estimate[0]) < 15 and float(pose_estimate[1]) > 10:
-            print("Left")
-            return "Left"
     
     def learn_new_face(self):
         obama_image = face_recognition.load_image_file("./test.jpeg")
