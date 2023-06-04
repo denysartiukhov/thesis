@@ -199,6 +199,7 @@ class MainController():
             mainImage = cv2.imread("/home/dartiukhov/Desktop/thesis_clean/thesis/set2/Denys/bright/JPEGs/close_left1.jpg")
             #mainImage = self.take_pic(self.mainCamera,480,yMain)
             sideImage = cv2.imread("/home/dartiukhov/Desktop/thesis_clean/thesis/set2/Denys/bright/JPEGs/close_left2.jpg")
+            registerImage = cv2.imread("/home/dartiukhov/Desktop/thesis_clean/thesis/set1/JPGs/d_bright.jpg")
             self.show_checked_in_list()
             self.display_pic(self.viewIdle.mainCameraLabel,mainImage)
             self.display_pic(self.viewIdle.sideCameraLabel,sideImage)
@@ -221,10 +222,10 @@ class MainController():
                                 self.model.checkIn(face_names1[0])
                                 self.greet(name)
                 if self.registration_ongoing and self.learning_ongoing:
-                    pose = self.estimate_pose(sideImage, 2)
+                    pose = self.estimate_pose(registerImage, 2)
                     direction = self.estimate_direction(pose) if pose else None
                     if direction == "Straight":
-                        cv2.imwrite(f"./test.jpeg", sideImage)
+                        cv2.imwrite(f"./test.jpeg", registerImage)
                         self.learn_new_face()
                         self.viewRegister.learningCompletedLabel.place(x=0, y=100)
                         logging.info("Learing complete")
