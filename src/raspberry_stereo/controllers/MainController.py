@@ -436,7 +436,7 @@ class MainController():
         else:
             self.mainImage = cv2.imread(f"/home/dartiukhov/Desktop/thesis_clean/thesis/{folder}/set2/{light}_color/{distance}_{pose}2_c.jpg")
             self.sideImage = cv2.imread(f"/home/dartiukhov/Desktop/thesis_clean/thesis/{folder}/set2/{light}_color/{distance}_{pose}1_c.jpg")
-            self.registerImage = cv2.imread(f"/home/dartiukhov/Desktop/thesis_clean/thesis/{folder}/set2/{person}_{light}_c.jpg")
+            self.registerImage = cv2.imread(f"/home/dartiukhov/Desktop/thesis_clean/thesis/{folder}/set1/{person}_{light}_c.jpg")
         self.display_pic(self.viewIdle.mainCameraLabel,self.mainImage)
         self.display_pic(self.viewIdle.sideCameraLabel,self.sideImage)
         self.display_pic(self.viewRegister.sideCameraLabel,self.registerImage)
