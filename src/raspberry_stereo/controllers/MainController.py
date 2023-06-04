@@ -304,6 +304,7 @@ class MainController():
                     # Find all the faces and face encodings in the current frame of video
 
         face_locations = face_recognition.face_locations(small_frame)
+        print(face_locations)
         face_encodings = face_recognition.face_encodings(small_frame, face_locations)
 
         face_names = []
