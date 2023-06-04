@@ -49,10 +49,8 @@ class MainModel():
         rows = cursor.fetchall()
         sqliteConnection.close()
         if len(rows) == 0:
-            print('Checking in...')
             return False
         else:
-            print('Already checked in')
             return True
 
     def checkIn(self, id):

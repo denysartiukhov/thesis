@@ -40,7 +40,6 @@ class MainController():
         self.model = MainModel()
         self.viewIdle = ViewIdle(self.root)
         self.viewRegister = ViewRegister(self.root)
-        
         self.viewIdle.registerNewFaceButton.bind('<Button>', self.start_registration)
         self.viewRegister.registrationDoneButton.bind('<Button>', self.complete_registration)
         self.viewRegister.registrationCancelButton.bind('<Button>', self.exit_registration)
@@ -81,11 +80,8 @@ class MainController():
         self.viewRegister.eightButton.bind('<Button>', lambda event: self.on_letter('8'))
         self.viewRegister.nineButton.bind('<Button>', lambda event: self.on_letter('9'))
         self.viewRegister.backspaceButton.bind('<Button>', self.on_backspace)
-
-        
         self.thread = threading.Thread(target=self.stream)
         self.thread.daemon = 1
-        
         self.draw_idle()
 
         
@@ -253,7 +249,7 @@ class MainController():
                     if direction == "Straight":
                         self.learn_new_face()
                         self.viewRegister.learningCompletedLabel.place(x=0, y=100)
-                        logging.info("Learing complete")
+                        logging.info("Learning completed")
                         self.learning_ongoing = False
                 prev = time.time()
 
@@ -297,7 +293,6 @@ class MainController():
                     # Find all the faces and face encodings in the current frame of video
 
         face_locations = face_recognition.face_locations(small_frame)
-        print(face_locations)
         face_encodings = face_recognition.face_encodings(small_frame, face_locations)
 
         face_names = []
@@ -346,7 +341,7 @@ class MainController():
             else:
                 results = self.model.face_mesh3.process(some_image)
         except Exception as e:
-            print("Oooops")
+            pass
         some_image.flags.writeable = True
         img_h, img_w, img_c = some_image.shape
 
@@ -401,7 +396,6 @@ class MainController():
                 y = angles[1] * 360
                 x = '%.3f'%(x)
                 y = '%.3f'%(y)
-                print(x,y)
 
                 return tuple([x, y])
     
@@ -414,8 +408,8 @@ class MainController():
             return "Left"
     
     def learn_new_face(self):
-        obama_face_encoding = face_recognition.face_encodings(self.registerImage)[0]
-        self.model.new_face_encoding_temp = [obama_face_encoding]
+        face_encodings = face_recognition.face_encodings(self.registerImage)[0]
+        self.model.new_face_encoding_temp = [face_encodings]
         
     def take_pic(self,cam,x,y):
         success, image = cam.read()
