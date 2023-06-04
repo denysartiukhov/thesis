@@ -210,6 +210,7 @@ class MainController():
                 print(face_names2)
                 if face_names2 != [] and face_names2 != ["Unknown"] and face_names2 and not self.registration_ongoing:
                     face_names1, face_locations1 = self.find_faces(mainImage)
+                    print(face_names1)
                     if face_names1 != [] and face_names1 != ["Unknown"] and face_names1:
                         if  len(face_names1) == 1 and len(face_names2) == 1 and face_names2 == face_names1:
                             pose1 = self.estimate_pose(sideImage, 1)
