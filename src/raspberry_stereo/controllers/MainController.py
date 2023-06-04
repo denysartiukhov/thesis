@@ -19,7 +19,7 @@ import numpy as np
 
 class MainController():
     def __init__(self, args):
-        self.args = argss
+        self.args = args
         self.learning_ongoing = False
         self.registration_ongoing = False
         self.mainCamera = cv2.VideoCapture(2)
