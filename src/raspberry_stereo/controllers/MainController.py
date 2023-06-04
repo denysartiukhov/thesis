@@ -427,8 +427,8 @@ class MainController():
             self.sideImage = self.take_pic(self.sideCamera,240,240)
             self.registerImage = self.sideImage
         else:
-            self.mainImage = cv2.imread(f"/home/dartiukhov/Desktop/thesis_clean/{folder}/far_straight1_c.jpg")
-            self.sideImage = cv2.imread(f"/home/dartiukhov/Desktop/thesis_clean/{folder}/far_straight2_c.jpg")
+            self.mainImage = cv2.imread(f"/home/dartiukhov/Desktop/thesis_clean/{folder}/far_straight2_c.jpg")
+            self.sideImage = cv2.imread(f"/home/dartiukhov/Desktop/thesis_clean/{folder}/far_straight1_c.jpg")
             self.registerImage = cv2.imread(f"/home/dartiukhov/Desktop/thesis_clean/{folder}/D_bright_c.jpg")
         self.display_pic(self.viewIdle.mainCameraLabel,self.mainImage)
         self.display_pic(self.viewIdle.sideCameraLabel,self.sideImage)
