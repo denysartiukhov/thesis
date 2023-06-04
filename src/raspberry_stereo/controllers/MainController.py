@@ -151,6 +151,16 @@ class MainController():
         self.viewRegister.bButton.place(x=510, y=280)  
         self.viewRegister.nButton.place(x=560, y=280) 
         self.viewRegister.mButton.place(x=610, y=280)
+        self.viewRegister.0Button.place(x=270, y=130)
+        self.viewRegister.1Button.place(x=320, y=130)
+        self.viewRegister.2Button.place(x=370, y=130)
+        self.viewRegister.3Button.place(x=420, y=130)
+        self.viewRegister.4Button.place(x=470, y=130)
+        self.viewRegister.5Button.place(x=520, y=130)
+        self.viewRegister.6Button.place(x=570, y=130)
+        self.viewRegister.7Button.place(x=620, y=130)
+        self.viewRegister.8Button.place(x=670, y=130)
+        self.viewRegister.9Button.place(x=720, y=280)
         self.viewRegister.backspaceButton.place(x=660, y=280)
         
     def hide_registration(self):
