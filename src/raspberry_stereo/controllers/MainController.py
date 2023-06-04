@@ -117,6 +117,7 @@ class MainController():
         self.draw_registration()
     
     def draw_idle(self):
+        self.viewIdle.alreadyCheckedInLabel.place(x=0, y=101)
         self.viewIdle.mainCameraLabel.place(x=240, y=0)
         self.viewIdle.sideCameraLabel.place(x=0, y=120)
         self.viewIdle.registerNewFaceButton.place(x=65, y=37)
@@ -246,7 +247,6 @@ class MainController():
                             name = self.model.getUserInfo(face_names1[0])
                             if self.model.isCheckedIn(face_names1[0]):
                                 self.viewIdle.alreadyCheckedInLabel.config(text=f"{name} already checked id.")
-                                self.viewIdle.alreadyCheckedInLabel.place(x=0, y=101)
                                 timer = 1
                             else:
                                 self.model.checkIn(face_names1[0])
@@ -266,7 +266,7 @@ class MainController():
                     timer += 1
                 else:
                     timer = 0
-                    self.viewIdle.alreadyCheckedInLabel.place_forget()
+                    self.viewIdle.alreadyCheckedInLabel.config(text="")
 
                 
     def greet(self,name):
