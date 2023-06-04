@@ -112,6 +112,7 @@ class MainController():
         self.viewIdle.registerNewFaceButton.place(x=65, y=37)
         
     def hide_idle(self):
+        self.alreadyCheckedInLabel.place_forget()
         self.viewIdle.mainCameraLabel.place_forget()
         self.viewIdle.sideCameraLabel.place_forget()
         self.viewIdle.registerNewFaceButton.place_forget()
@@ -237,7 +238,7 @@ class MainController():
         self.hide_idle()
         self.viewIdle.welcomeMessageLabel.config(text=f"Welcome {name}")
         self.viewIdle.welcomeMessageLabel.place(x=0, y=0)
-        time.sleep(3)
+        time.sleep(2)
         self.viewIdle.welcomeMessageLabel.place_forget()
         self.draw_idle()
         
