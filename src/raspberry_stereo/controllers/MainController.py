@@ -308,6 +308,7 @@ class MainController():
 
         face_locations = face_recognition.face_locations(small_frame)
         print(face_locations)
+        small_frame = small_frame[:,:,newaxis]
         face_encodings = face_recognition.face_encodings(small_frame.repeat(3, 2), face_locations)
 
         face_names = []
