@@ -221,7 +221,7 @@ class MainController():
                     if direction == "Straight":
                         cv2.imwrite(f"./test.jpeg", sideImage)
                         self.learn_new_face()
-                        self.viewRegister.learningCompletedLabel.place(x=580, y=100)
+                        self.viewRegister.learningCompletedLabel.place(x=0, y=100)
                         logging.info("Learing complete")
                         self.learning_ongoing = False
                 prev = time.time()
