@@ -228,6 +228,9 @@ class MainController():
 
             self.capture_frames()
             self.update_checked_in_list()
+            pose_side = self.estimate_pose(self.sideImage, 1)
+            pose_main = self.estimate_pose(self.mainImage, 2)
+            logging.debug(f"{pose_side}, {pose_main}")
             
             if time_elapsed > 1./frame_rate:
                 if not self.registration_ongoing:
