@@ -96,7 +96,7 @@ class MainModel():
         rows = cursor.fetchall()
         user_name_list = ""
         for row in rows:
-            cursor.execute(f"SELECT first_name FROM users WHERE id = {row[0]};")
+            cursor.execute(f"SELECT first_name FROM users WHERE id = '{row[0]}';")
             rows2 = cursor.fetchall()
             for row2 in rows2:
                 print(row2[0])
