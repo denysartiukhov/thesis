@@ -237,10 +237,8 @@ class MainController():
             
             if time_elapsed > 1./frame_rate:
                 face_names2, face_locations2 = self.find_faces(sideImage)
-                print(face_names2)
                 if face_names2 != [] and face_names2 != ["Unknown"] and face_names2 and not self.registration_ongoing:
                     face_names1, face_locations1 = self.find_faces(mainImage)
-                    print(face_names1)
                     if face_names1 != [] and face_names1 != ["Unknown"] and face_names1:
                         if  len(face_names1) == 1 and len(face_names2) == 1 and face_names2 == face_names1:
                             pose1 = self.estimate_pose(sideImage, 1)
@@ -347,15 +345,11 @@ class MainController():
         some_image.flags.writeable = False
         try:
             if index == 1:
-                print('1')
                 results = self.model.face_mesh1.process(some_image)
             elif index == 2:
-                print('2')
                 results = self.model.face_mesh2.process(some_image)
             else:
-                print('3')
                 results = self.model.face_mesh3.process(some_image)
-            print('YES')
         except Exception as e:
             print("Oooops")
         some_image.flags.writeable = True
