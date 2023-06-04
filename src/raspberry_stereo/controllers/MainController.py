@@ -302,7 +302,7 @@ class MainController():
         face_encodings = []
         face_names = []
              
-        #small_frame = cv2.resize(image, (0, 0), fx=0.25, fy=0.25)
+        small_frame = image
                              
                     # Find all the faces and face encodings in the current frame of video
 
