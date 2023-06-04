@@ -244,7 +244,7 @@ class MainController():
         self.draw_idle()
 
     def show_checked_in_list(self):
-        self.viewIdle.alreadyCheckedInLabel.place(x=200, y=0)
+        self.viewIdle.checkedInList.place(x=200, y=0)
         
     def on_letter(self,letter):
         self.viewRegister.faceNameText.insert(tkinter.END, letter)
