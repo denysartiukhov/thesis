@@ -24,12 +24,10 @@ def setup_command_line_parser():
 
 if __name__ == '__main__':
     args = setup_command_line_parser()
-    if args.train_from_source:
-        print("TESTTT")
     if args.debug:
         logging.basicConfig(level = logging.DEBUG, format='%(asctime)s [%(levelname)s] %(message)s')
     else:
         logging.basicConfig(level = logging.INFO, format='%(asctime)s [%(levelname)s] %(message)s')
-    controller = MainController()
+    controller = MainController(args)
     controller.run()
     

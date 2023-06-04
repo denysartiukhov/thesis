@@ -18,7 +18,8 @@ import mediapipe as mp
 import numpy as np
 
 class MainController():
-    def __init__(self):
+    def __init__(self, args):
+        self.args = argss
         self.learning_ongoing = False
         self.registration_ongoing = False
         self.mainCamera = cv2.VideoCapture(2)
@@ -222,11 +223,11 @@ class MainController():
         timer = 0
         yMain = 560 if logging.root.level == logging.INFO else 360
         while True:
-            if logging.root.level == logging.INFO:
+            if not self.args.train_from_source:
                 mainImage = self.take_pic(self.mainCamera,480,yMain)
                 sideImage = self.take_pic(self.sideCamera,240,240)
                 registerImage = sideImage
-            elif logging.root.level == logging.DEBUG:
+            else:
                 mainImage = cv2.imread("/home/dartiukhov/Desktop/thesis_clean/thesis/far_straight1_c2.jpg")
                 sideImage = cv2.imread("/home/dartiukhov/Desktop/thesis_clean/thesis/far_straight2_c1.jpg")
                 registerImage = cv2.imread("/home/dartiukhov/Desktop/thesis_clean/thesis/far_straight2_c1.jpg")
