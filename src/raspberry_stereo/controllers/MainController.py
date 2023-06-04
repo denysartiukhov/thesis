@@ -68,6 +68,16 @@ class MainController():
         self.viewRegister.xButton.bind('<Button>', lambda event: self.on_letter('X'))
         self.viewRegister.yButton.bind('<Button>', lambda event: self.on_letter('Y'))
         self.viewRegister.zButton.bind('<Button>', lambda event: self.on_letter('Z'))
+        self.viewRegister.zeroButton.bind('<Button>', lambda event: self.on_letter('0'))
+        self.viewRegister.oneButton.bind('<Button>', lambda event: self.on_letter('1'))
+        self.viewRegister.twoButton.bind('<Button>', lambda event: self.on_letter('2'))
+        self.viewRegister.threeButton.bind('<Button>', lambda event: self.on_letter('3'))
+        self.viewRegister.fourButton.bind('<Button>', lambda event: self.on_letter('4'))
+        self.viewRegister.fiveButton.bind('<Button>', lambda event: self.on_letter('5'))
+        self.viewRegister.sixButton.bind('<Button>', lambda event: self.on_letter('6'))
+        self.viewRegister.sevenButton.bind('<Button>', lambda event: self.on_letter('7'))
+        self.viewRegister.eightButton.bind('<Button>', lambda event: self.on_letter('8'))
+        self.viewRegister.nineButton.bind('<Button>', lambda event: self.on_letter('9'))
         self.viewRegister.backspaceButton.bind('<Button>', self.on_backspace)
 
         
