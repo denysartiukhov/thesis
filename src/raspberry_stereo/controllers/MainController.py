@@ -17,7 +17,14 @@ import face_recognition
 import mediapipe as mp
 import numpy as np
 
-folder = "thesis"
+folder = "Bisera_JPEGs_color"
+light = "bright_color"
+#light = "half_bright_color"
+#light = "half_dark_color"
+distance = "far"
+pose = "straight"
+person = "B"
+
 
 class MainController():
     def __init__(self, args):
@@ -427,9 +434,9 @@ class MainController():
             self.sideImage = self.take_pic(self.sideCamera,240,240)
             self.registerImage = self.sideImage
         else:
-            self.mainImage = cv2.imread(f"/home/dartiukhov/Desktop/thesis_clean/{folder}/far_straight2_c.jpg")
-            self.sideImage = cv2.imread(f"/home/dartiukhov/Desktop/thesis_clean/{folder}/far_straight1_c.jpg")
-            self.registerImage = cv2.imread(f"/home/dartiukhov/Desktop/thesis_clean/{folder}/D_bright_c.jpg")
+            self.mainImage = cv2.imread(f"/home/dartiukhov/Desktop/thesis_clean/thesis/{folder}/set2/{light}/{distance}_{pose}2_c.jpg")
+            self.sideImage = cv2.imread(f"/home/dartiukhov/Desktop/thesis_clean/thesis/{folder}/set2/{light}/{distance}_{pose}1_c.jpg")
+            self.registerImage = cv2.imread(f"/home/dartiukhov/Desktop/thesis_clean/thesis/{folder}/set2/{person}_{distance}_c.jpg")
         self.display_pic(self.viewIdle.mainCameraLabel,self.mainImage)
         self.display_pic(self.viewIdle.sideCameraLabel,self.sideImage)
         self.display_pic(self.viewRegister.sideCameraLabel,self.registerImage)
