@@ -95,5 +95,8 @@ class MainModel():
         cursor = sqliteConnection.cursor()
         cursor.execute(f"SELECT first_name FROM checked_in;")
         rows = cursor.fetchall()
-        print(rows)
-        
+        user_name_list = ""
+        for row in rows:
+            user_name_list += row[0]
+            user_name_list += "\n"
+        print(user_name_list)
