@@ -28,6 +28,9 @@ class MainController():
         self.mainCamera.set(4,480)
         self.sideCamera.set(3,320)
         self.sideCamera.set(4,240)
+        self.mainImage = None
+        self.sideImage = None
+        self.registerImage = None
         self.root = tkinter.Tk()
         self.root.title('Automated Check-In')
         self.root.configure(background='black', cursor='none')
@@ -224,27 +227,27 @@ class MainController():
         yMain = 560 if logging.root.level == logging.INFO else 360
         while True:
             if not self.args.train_from_source:
-                mainImage = self.take_pic(self.mainCamera,480,yMain)
-                sideImage = self.take_pic(self.sideCamera,240,240)
-                registerImage = sideImage
-                self.display_pic(self.viewIdle.mainCameraLabel,mainImage)
-                self.display_pic(self.viewIdle.sideCameraLabel,sideImage)
-                self.display_pic(self.viewRegister.sideCameraLabel,registerImage)
+                self.mainImage = self.take_pic(self.mainCamera,480,yMain)
+                self.sideImage = self.take_pic(self.sideCamera,240,240)
+                self.registerImage = self.sideImage
+                self.display_pic(self.viewIdle.mainCameraLabel,self.mainImage)
+                self.display_pic(self.viewIdle.sideCameraLabel,self.sideImage)
+                self.display_pic(self.viewRegister.sideCameraLabel,self.registerImage)
             else:
-                mainImage = cv2.imread("/home/dartiukhov/Desktop/thesis_clean/thesis/far_straight1_c2.jpg")
-                sideImage = cv2.imread("/home/dartiukhov/Desktop/thesis_clean/thesis/far_straight2_c1.jpg")
-                registerImage = cv2.imread("/home/dartiukhov/Desktop/thesis_clean/thesis/far_straight2_c1.jpg")
+                self.mainImage = cv2.imread("/home/dartiukhov/Desktop/thesis_clean/thesis/far_straight1_c2.jpg")
+                self.sideImage = cv2.imread("/home/dartiukhov/Desktop/thesis_clean/thesis/far_straight2_c1.jpg")
+                self.registerImage = cv2.imread("/home/dartiukhov/Desktop/thesis_clean/thesis/far_straight2_c1.jpg")
             time_elapsed = time.time() - prev
             self.update_checked_in_list()
             
             if time_elapsed > 1./frame_rate:
-                face_names2, face_locations2 = self.find_faces(sideImage)
+                face_names2, face_locations2 = self.find_faces(self.sideImage)
                 if face_names2 != [] and face_names2 != ["Unknown"] and face_names2 and not self.registration_ongoing:
-                    face_names1, face_locations1 = self.find_faces(mainImage)
+                    face_names1, face_locations1 = self.find_faces(self.mainImage)
                     if face_names1 != [] and face_names1 != ["Unknown"] and face_names1:
                         if  len(face_names1) == 1 and len(face_names2) == 1 and face_names2 == face_names1:
-                            pose1 = self.estimate_pose(sideImage, 1)
-                            pose2 = self.estimate_pose(mainImage, 2)
+                            pose1 = self.estimate_pose(self.sideImage, 1)
+                            pose2 = self.estimate_pose(self.mainImage, 2)
                             name = self.model.getUserInfo(face_names1[0])
                             if self.model.isCheckedIn(face_names1[0]):
                                 self.viewIdle.alreadyCheckedInLabel.config(text=f"{name} already checked id.", bg="green")
@@ -253,10 +256,10 @@ class MainController():
                                 self.model.checkIn(face_names1[0])
                                 self.greet(name)
                 if self.registration_ongoing and self.learning_ongoing:
-                    pose = self.estimate_pose(registerImage, 2)
+                    pose = self.estimate_pose(self.registerImage, 2)
                     direction = self.estimate_direction(pose) if pose else None
                     if direction == "Straight":
-                        cv2.imwrite(f"./test.jpeg", registerImage)
+                        cv2.imwrite(f"./test.jpeg", self.registerImage)
                         self.learn_new_face()
                         self.viewRegister.learningCompletedLabel.place(x=0, y=100)
                         logging.info("Learing complete")
