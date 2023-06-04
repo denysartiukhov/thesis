@@ -198,6 +198,7 @@ class MainController():
             self.display_pic(self.viewIdle.mainCameraLabel,mainImage)
             self.display_pic(self.viewIdle.sideCameraLabel,sideImage)
             self.display_pic(self.viewRegister.sideCameraLabel,sideImage)
+            self.show_checked_in_list()
             
             if time_elapsed > 1./frame_rate:
                 face_names2, face_locations2 = self.find_faces(sideImage)
@@ -241,6 +242,9 @@ class MainController():
         time.sleep(2)
         self.viewIdle.welcomeMessageLabel.place_forget()
         self.draw_idle()
+
+    def show_checked_in_list(self):
+        self.viewIdle.alreadyCheckedInLabel.place(x=200, y=0)
         
     def on_letter(self,letter):
         self.viewRegister.faceNameText.insert(tkinter.END, letter)
