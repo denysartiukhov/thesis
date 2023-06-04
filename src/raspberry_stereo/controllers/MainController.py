@@ -119,10 +119,10 @@ class MainController():
     
     def draw_registration(self):
         self.viewRegister.sideCameraLabel.place(x=0, y=120)
-        self.viewRegister.registrationDoneButton.place(x=284, y=370)
+        self.viewRegister.registrationDoneButton.place(x=524, y=370)
         #self.viewRegister.registrationDoneButton["state"] = "disabled"
-        self.viewRegister.registrationCancelButton.place(x=144, y=370)
-        self.viewRegister.faceNameText.place(x=30, y=120)
+        self.viewRegister.registrationCancelButton.place(x=384, y=370)
+        self.viewRegister.faceNameText.place(x=270, y=120)
         self.viewRegister.qButton.place(x=270, y=180) 
         self.viewRegister.wButton.place(x=320, y=180)  
         self.viewRegister.eButton.place(x=370, y=180)  
