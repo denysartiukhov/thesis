@@ -189,11 +189,12 @@ class MainController():
         frame_rate = 1
         prev = 0
         timer = 0
+        yMain = 560 if logging.root.level == logging.INFO else 360
         while True:
             #logging.debug("debug")
             #logging.info("info")
             time_elapsed = time.time() - prev
-            mainImage = self.take_pic(self.mainCamera,480,360)
+            mainImage = self.take_pic(self.mainCamera,480,yMain)
             sideImage = self.take_pic(self.sideCamera,240,240)
             self.show_checked_in_list()
             self.display_pic(self.viewIdle.mainCameraLabel,mainImage)
