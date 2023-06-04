@@ -226,9 +226,9 @@ class MainController():
             #logging.debug("debug")
             #logging.info("info")
             time_elapsed = time.time() - prev
-            mainImage = cv2.imread("/home/dartiukhov/Desktop/thesis_clean/thesis/far_straight1_c2.jpg")
-            sideImage = cv2.imread("/home/dartiukhov/Desktop/thesis_clean/thesis/far_straight2_c1.jpg")
-            registerImage = cv2.imread("/home/dartiukhov/Desktop/thesis_clean/thesis/far_straight2_c1.jpg")
+            #mainImage = cv2.imread("/home/dartiukhov/Desktop/thesis_clean/thesis/far_straight1_c2.jpg")
+            #sideImage = cv2.imread("/home/dartiukhov/Desktop/thesis_clean/thesis/far_straight2_c1.jpg")
+            #registerImage = cv2.imread("/home/dartiukhov/Desktop/thesis_clean/thesis/far_straight2_c1.jpg")
             mainImage = cv2.imread("/home/dartiukhov/Desktop/thesis_clean/thesis/set2/Bisera/bright/JPEGs/far_straight1.jpg")
             sideImage = cv2.imread("/home/dartiukhov/Desktop/thesis_clean/thesis/set2/Bisera/bright/JPEGs/far_straight2.jpg")
             registerImage = cv2.imread("/home/dartiukhov/Desktop/thesis_clean/thesis/set2/Bisera/bright/JPEGs/far_straight2.jpg")
