@@ -160,7 +160,7 @@ class MainController():
         self.viewRegister.sixButton.place(x=570, y=160)
         self.viewRegister.sevenButton.place(x=620, y=160)
         self.viewRegister.eightButton.place(x=670, y=160)
-        self.viewRegister.nineButton.place(x=720, y=210)
+        self.viewRegister.nineButton.place(x=720, y=160)
         self.viewRegister.backspaceButton.place(x=660, y=310)
         
     def hide_registration(self):
@@ -195,6 +195,16 @@ class MainController():
         self.viewRegister.bButton.place_forget()
         self.viewRegister.nButton.place_forget()
         self.viewRegister.mButton.place_forget()
+        self.viewRegister.zeroButton.place_forget()
+        self.viewRegister.oneButton.place_forget()
+        self.viewRegister.twoButton.place_forget()
+        self.viewRegister.threeButton.place_forget()
+        self.viewRegister.fourButton.place_forget()
+        self.viewRegister.fiveButton.place_forget()
+        self.viewRegister.sixButton.place_forget()
+        self.viewRegister.sevenButton.place_forget()
+        self.viewRegister.eightButton.place_forget()
+        self.viewRegister.nineButton.place_forget()
         self.viewRegister.backspaceButton.place_forget()
         
     def stream(self):
