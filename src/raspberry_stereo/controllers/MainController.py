@@ -110,12 +110,14 @@ class MainController():
         self.viewIdle.mainCameraLabel.place(x=240, y=0)
         self.viewIdle.sideCameraLabel.place(x=0, y=120)
         self.viewIdle.registerNewFaceButton.place(x=65, y=37)
+        self.viewIdle.checkedInList.place(x=620, y=0)
         
     def hide_idle(self):
         self.viewIdle.alreadyCheckedInLabel.place_forget()
         self.viewIdle.mainCameraLabel.place_forget()
         self.viewIdle.sideCameraLabel.place_forget()
         self.viewIdle.registerNewFaceButton.place_forget()
+        self.viewIdle.checkedInList.place_forget()
     
     def draw_registration(self):
         self.viewRegister.sideCameraLabel.place(x=0, y=120)
@@ -246,7 +248,6 @@ class MainController():
     def show_checked_in_list(self):
         user_name_list = self.model.get_checked_in_users()
         self.viewIdle.checkedInList.config(text=user_name_list)
-        self.viewIdle.checkedInList.place(x=620, y=0)
         
     def on_letter(self,letter):
         self.viewRegister.faceNameText.insert(tkinter.END, letter)
