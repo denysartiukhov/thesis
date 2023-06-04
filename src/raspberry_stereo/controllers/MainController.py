@@ -220,7 +220,7 @@ class MainController():
                                 self.model.checkIn(face_names1[0])
                                 self.greet(name)
                 if self.registration_ongoing and self.learning_ongoing:
-                    pose = self.estimate_pose(sideImage, 3)
+                    pose = self.estimate_pose(sideImage, 2)
                     direction = self.estimate_direction(pose) if pose else None
                     if direction == "Straight":
                         cv2.imwrite(f"./test.jpeg", sideImage)
@@ -311,13 +311,21 @@ class MainController():
             return None, None
         
     def estimate_pose(self,some_image, index):
+        results = None
         some_image.flags.writeable = False
-        if index == 1:
-            results = self.model.face_mesh1.process(some_image)
-        elif index == 2:
-            results = self.model.face_mesh2.process(some_image)
-        else:
-            results = self.model.face_mesh3.process(some_image)
+        try:
+            if index == 1:
+                print('1')
+                results = self.model.face_mesh1.process(some_image)
+            elif index == 2:
+                print('2')
+                results = self.model.face_mesh2.process(some_image)
+            else:
+                print('3')
+                results = self.model.face_mesh3.process(some_image)
+            print('YES')
+        except Exception as e:
+            print("Oooops")
         some_image.flags.writeable = True
         img_h, img_w, img_c = some_image.shape
 
@@ -326,7 +334,7 @@ class MainController():
         x = 0
         y = 0
 
-        if results.multi_face_landmarks:
+        if results and results.multi_face_landmarks:
             for face_landmarks in results.multi_face_landmarks:
                 for idx, lm in enumerate(face_landmarks.landmark):
                     if idx == 33 or idx == 263 or idx == 1 or idx == 61 or idx == 291 or idx == 199:
