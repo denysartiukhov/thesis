@@ -224,7 +224,7 @@ class MainController():
         prev = 0
         timer = 0
         while True:
-            capture_frames(self)
+            self.capture_frames()
             time_elapsed = time.time() - prev
             self.update_checked_in_list()
             
