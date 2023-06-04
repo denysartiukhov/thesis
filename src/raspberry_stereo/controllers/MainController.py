@@ -224,24 +224,25 @@ class MainController():
         prev = 0
         timer = 0
         while True:
-            self.capture_frames()
             time_elapsed = time.time() - prev
+
+            self.capture_frames()
             self.update_checked_in_list()
             
             if time_elapsed > 1./frame_rate:
-                face_names2, face_locations2 = self.find_faces(self.sideImage)
-                if face_names2 != [] and face_names2 != ["Unknown"] and face_names2 and not self.registration_ongoing:
-                    face_names1, face_locations1 = self.find_faces(self.mainImage)
-                    if face_names1 != [] and face_names1 != ["Unknown"] and face_names1:
-                        if  len(face_names1) == 1 and len(face_names2) == 1 and face_names2 == face_names1:
+                face_names_side, face_locations_side = self.find_faces(self.sideImage)
+                if face_names_side != [] and face_names_side != ["Unknown"] and face_names_side and not self.registration_ongoing:
+                    face_names_main, face_locations_main = self.find_faces(self.mainImage)
+                    if face_names_main != [] and face_names_main != ["Unknown"] and face_names_main:
+                        if  len(face_names_main) == 1 and len(face_names_side) == 1 and face_names_side == face_names_main:
                             pose1 = self.estimate_pose(self.sideImage, 1)
                             pose2 = self.estimate_pose(self.mainImage, 2)
-                            name = self.model.getUserInfo(face_names1[0])
-                            if self.model.isCheckedIn(face_names1[0]):
+                            name = self.model.getUserInfo(face_names_main[0])
+                            if self.model.isCheckedIn(face_names_main[0]):
                                 self.viewIdle.alreadyCheckedInLabel.config(text=f"{name} already checked id.", bg="green")
                                 timer = 1
                             else:
-                                self.model.checkIn(face_names1[0])
+                                self.model.checkIn(face_names_main[0])
                                 self.greet(name)
                 if self.registration_ongoing and self.learning_ongoing:
                     pose = self.estimate_pose(self.registerImage, 2)
