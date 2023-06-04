@@ -40,7 +40,7 @@ class MainModel():
         
     def saveEncoding(self, id, encoding):
         self.cursor.executescript(f"INSERT INTO faces(id, encoding) VALUES('{id}', '{encoding}')")
-        logging.debug(f"Encoding for {id} saved to DB.")
+        logging.debug(f"Encoding for id={id} saved to DB.")
     
     def isCheckedIn(self, id):
         sqliteConnection = sqlite3.connect('raspberry.db')
@@ -58,7 +58,7 @@ class MainModel():
         cursor = sqliteConnection.cursor()
         cursor.executescript(f"INSERT INTO checked_in(id) VALUES('{id}')")
         sqliteConnection.close()
-        logging.debug(f"User {id} checked in for the day.")
+        logging.debug(f"User id={id} checked in for the day.")
 
     def getUserInfo(self, id):
         sqliteConnection = sqlite3.connect('raspberry.db')

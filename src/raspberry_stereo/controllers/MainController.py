@@ -227,20 +227,25 @@ class MainController():
             
             if time_elapsed > 1./frame_rate:
                 if not self.registration_ongoing:
+                    logging.debug(f"Looking for faces in the side frame...")
                     face_names_side, face_locations_side = self.find_faces(self.sideImage)
                     if face_names_side != [] and face_names_side != ["Unknown"] and face_names_side:
+                        logging.debug(f"Face found in the side frame.")
+                        logging.debug(f"Looking for faces in the main frame...")
                         face_names_main, face_locations_main = self.find_faces(self.mainImage)
                         if face_names_main != [] and face_names_main != ["Unknown"] and face_names_main:
                             if  len(face_names_main) == 1 and face_names_side == face_names_main:
+                                logging.debug(f"Face found in the main frame.")
                                 pose_side = self.estimate_pose(self.sideImage, 1)
                                 pose_main = self.estimate_pose(self.mainImage, 2)
                                 angle_difference = float(pose_side[1]) - float(pose_main[1])
-                                logging.debug(f"{angle_difference}")
+                                logging.debug(f"The angle difference between side frame and main frame is {angle_difference}.")
                                 user_first_name = self.model.getUserInfo(face_names_main[0])
                                 if self.model.isCheckedIn(face_names_main[0]):
                                     self.viewIdle.alreadyCheckedInLabel.config(text=f"{user_first_name} already checked id.", bg="green")
                                     timer = 1
                                 elif angle_difference > 10:
+                                    self.viewIdle.alreadyCheckedInLabel.config(text=f"{user_first_name} has not been checked id yet. Checking in...", bg="green")
                                     self.model.checkIn(face_names_main[0])
                                     self.greet(user_first_name)
                 if self.registration_ongoing and self.learning_ongoing:
@@ -249,7 +254,7 @@ class MainController():
                     if direction == "Straight":
                         self.learn_new_face()
                         self.viewRegister.learningCompletedLabel.place(x=0, y=100)
-                        logging.info("Learning completed")
+                        logging.info("Learning completed.")
                         self.learning_ongoing = False
                 prev = time.time()
 
@@ -316,7 +321,7 @@ class MainController():
             right *= 4
             bottom *= 4
             left *= 4
-            
+
         if not face_names == []:
             return face_names[0], face_locations
         else:
