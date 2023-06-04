@@ -6,7 +6,6 @@ from raspberry_stereo.views.ViewRegister import ViewRegister
 from raspberry_stereo.models.MainModel import MainModel
 import logging
 import sqlite3
-
 import tkinter, threading
 import PIL
 from PIL import ImageTk
@@ -31,7 +30,6 @@ class MainController():
         self.root = tkinter.Tk()
         self.root.title('Automated Check-In')
         self.root.configure(background='black', cursor='none')
-        self.root.configure(background='black')
         self.root.geometry("800x480")
         self.root.attributes('-fullscreen', True)
         self.root.protocol("WM_DELETE_WINDOW", self.close)
@@ -224,17 +222,19 @@ class MainController():
         timer = 0
         yMain = 560 if logging.root.level == logging.INFO else 360
         while True:
-            #logging.debug("debug")
-            #logging.info("info")
-            time_elapsed = time.time() - prev
-            mainImage = cv2.imread("/home/dartiukhov/Desktop/thesis_clean/thesis/far_straight1_c2.jpg")
-            #mainImage = self.take_pic(self.mainCamera,480,yMain)
-            sideImage = cv2.imread("/home/dartiukhov/Desktop/thesis_clean/thesis/far_straight2_c1.jpg")
-            registerImage = cv2.imread("/home/dartiukhov/Desktop/thesis_clean/thesis/far_straight2_c1.jpg")
-            self.show_checked_in_list()
+            if logging.root.level == logging.INFO:
+                mainImage = self.take_pic(self.mainCamera,480,yMain)
+                sideImage = self.take_pic(self.sideCamera,240,240)
+                registerImage = sideImage
+            elif logging.root.level == logging.DEBUG:
+                mainImage = cv2.imread("/home/dartiukhov/Desktop/thesis_clean/thesis/far_straight1_c2.jpg")
+                sideImage = cv2.imread("/home/dartiukhov/Desktop/thesis_clean/thesis/far_straight2_c1.jpg")
+                registerImage = cv2.imread("/home/dartiukhov/Desktop/thesis_clean/thesis/far_straight2_c1.jpg")
             self.display_pic(self.viewIdle.mainCameraLabel,mainImage)
             self.display_pic(self.viewIdle.sideCameraLabel,sideImage)
             self.display_pic(self.viewRegister.sideCameraLabel,registerImage)
+            time_elapsed = time.time() - prev
+            self.update_checked_in_list()
             
             if time_elapsed > 1./frame_rate:
                 face_names2, face_locations2 = self.find_faces(sideImage)
@@ -277,7 +277,7 @@ class MainController():
         self.viewIdle.welcomeMessageLabel.place_forget()
         self.draw_idle()
 
-    def show_checked_in_list(self):
+    def update_checked_in_list(self):
         user_name_list = self.model.get_checked_in_users()
         self.viewIdle.checkedInList.config(text=user_name_list)
         
