@@ -302,13 +302,13 @@ class MainController():
         face_encodings = []
         face_names = []
              
-        small_frame = image
+        small_frame = cv2.resize(image, (0, 0), fx=0.25, fy=0.25)
                              
                     # Find all the faces and face encodings in the current frame of video
 
         face_locations = face_recognition.face_locations(small_frame)
         print(face_locations)
-        face_encodings = face_recognition.face_encodings(small_frame, face_locations)
+        face_encodings = face_recognition.face_encodings(small_frame.repeat(3, 2), face_locations)
 
         face_names = []
         for face_encoding in face_encodings:
