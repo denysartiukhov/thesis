@@ -199,7 +199,7 @@ class MainController():
             mainImage = cv2.imread("/home/dartiukhov/Desktop/thesis_clean/thesis/far_straight1_c.jpg")
             #mainImage = self.take_pic(self.mainCamera,480,yMain)
             sideImage = cv2.imread("/home/dartiukhov/Desktop/thesis_clean/thesis/far_straight2_c.jpg")
-            registerImage = cv2.imread"/home/dartiukhov/Desktop/thesis_clean/thesis/far_straight1_c.jpg")
+            registerImage = cv2.imread("/home/dartiukhov/Desktop/thesis_clean/thesis/far_straight1_c.jpg")
             self.show_checked_in_list()
             self.display_pic(self.viewIdle.mainCameraLabel,mainImage)
             self.display_pic(self.viewIdle.sideCameraLabel,sideImage)
