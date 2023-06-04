@@ -223,6 +223,9 @@ class MainController():
         frame_rate = 1
         prev = 0
         timer = 0
+        face_names_main = None
+        face_names_side = None
+        
         while True:
             time_elapsed = time.time() - prev
 
