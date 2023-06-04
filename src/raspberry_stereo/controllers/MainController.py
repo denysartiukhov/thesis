@@ -244,7 +244,7 @@ class MainController():
                                 if self.model.isCheckedIn(face_names_main[0]):
                                     self.viewIdle.alreadyCheckedInLabel.config(text=f"{user_first_name} already checked id.", bg="green")
                                     timer = 1
-                                else:
+                                elif angle_difference > 10:
                                     self.model.checkIn(face_names_main[0])
                                     self.greet(user_first_name)
                 if self.registration_ongoing and self.learning_ongoing:
