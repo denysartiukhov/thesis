@@ -224,7 +224,7 @@ class MainController():
         prev = 0
         timer = 0
         while True:
-            take_pic2(self)
+            capture_frames(self)
             time_elapsed = time.time() - prev
             self.update_checked_in_list()
             
@@ -426,7 +426,7 @@ class MainController():
         image = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
         return image
     
-    def take_pic2(self):
+    def capture_frames(self):
         yMain = 560 if logging.root.level == logging.INFO else 360
         if not self.args.train_from_source:
             self.mainImage = self.take_pic(self.mainCamera,480,yMain)
