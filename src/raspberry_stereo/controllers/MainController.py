@@ -195,10 +195,10 @@ class MainController():
             time_elapsed = time.time() - prev
             mainImage = self.take_pic(self.mainCamera,480,560)
             sideImage = self.take_pic(self.sideCamera,240,240)
+            self.show_checked_in_list()
             self.display_pic(self.viewIdle.mainCameraLabel,mainImage)
             self.display_pic(self.viewIdle.sideCameraLabel,sideImage)
             self.display_pic(self.viewRegister.sideCameraLabel,sideImage)
-            self.show_checked_in_list()
             
             if time_elapsed > 1./frame_rate:
                 face_names2, face_locations2 = self.find_faces(sideImage)
