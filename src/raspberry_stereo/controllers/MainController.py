@@ -233,17 +233,17 @@ class MainController():
                 face_names_side, face_locations_side = self.find_faces(self.sideImage)
                 if face_names_side != [] and face_names_side != ["Unknown"] and face_names_side and not self.registration_ongoing:
                     face_names_main, face_locations_main = self.find_faces(self.mainImage)
-                    if face_names_main != [] and face_names_main != ["Unknown"] and face_names_main:
-                        if  len(face_names_main) == 1 and len(face_names_side) == 1 and face_names_side == face_names_main:
-                            pose1 = self.estimate_pose(self.sideImage, 1)
-                            pose2 = self.estimate_pose(self.mainImage, 2)
-                            name = self.model.getUserInfo(face_names_main[0])
-                            if self.model.isCheckedIn(face_names_main[0]):
-                                self.viewIdle.alreadyCheckedInLabel.config(text=f"{name} already checked id.", bg="green")
-                                timer = 1
-                            else:
-                                self.model.checkIn(face_names_main[0])
-                                self.greet(name)
+                if face_names_main != [] and face_names_main != ["Unknown"] and face_names_main:
+                    if  len(face_names_main) == 1 and len(face_names_side) == 1 and face_names_side == face_names_main:
+                        pose1 = self.estimate_pose(self.sideImage, 1)
+                        pose2 = self.estimate_pose(self.mainImage, 2)
+                        name = self.model.getUserInfo(face_names_main[0])
+                        if self.model.isCheckedIn(face_names_main[0]):
+                            self.viewIdle.alreadyCheckedInLabel.config(text=f"{name} already checked id.", bg="green")
+                            timer = 1
+                        else:
+                            self.model.checkIn(face_names_main[0])
+                            self.greet(name)
                 if self.registration_ongoing and self.learning_ongoing:
                     pose = self.estimate_pose(self.registerImage, 2)
                     direction = self.estimate_direction(pose) if pose else None
