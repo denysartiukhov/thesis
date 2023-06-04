@@ -230,15 +230,15 @@ class MainController():
             #mainImage = self.take_pic(self.mainCamera,480,yMain)
             sideImage = cv2.imread("/home/dartiukhov/Desktop/thesis_clean/thesis/far_straight2_c1.jpg")
             registerImage = cv2.imread("/home/dartiukhov/Desktop/thesis_clean/thesis/far_straight2_c1.jpg")
-            mainImage = cv2.cvtColor(mainImage, cv2.COLOR_BGR2GRAY)
-            sideImage = cv2.cvtColor(sideImage, cv2.COLOR_BGR2GRAY)
-            registerImage = cv2.cvtColor(registerImage, cv2.COLOR_BGR2GRAY)
             self.show_checked_in_list()
             self.display_pic(self.viewIdle.mainCameraLabel,mainImage)
             self.display_pic(self.viewIdle.sideCameraLabel,sideImage)
             self.display_pic(self.viewRegister.sideCameraLabel,registerImage)
             
             if time_elapsed > 1./frame_rate:
+                sideImage = face_recognition.load_image_file("/home/dartiukhov/Desktop/thesis_clean/thesis/far_straight2_c1.jpg", mode='L')
+                mainImage = face_recognition.load_image_file("/home/dartiukhov/Desktop/thesis_clean/thesis/far_straight1_c2.jpg", mode='L')
+                registerImage = face_recognition.load_image_file("/home/dartiukhov/Desktop/thesis_clean/thesis/far_straight2_c1.jpg", mode='L')
                 face_names2, face_locations2 = self.find_faces(sideImage)
                 if face_names2 != [] and face_names2 != ["Unknown"] and face_names2 and not self.registration_ongoing:
                     face_names1, face_locations1 = self.find_faces(mainImage)
@@ -300,7 +300,7 @@ class MainController():
         face_encodings = []
         face_names = []
              
-        #small_frame = cv2.resize(image, (0, 0), fx=0.25, fy=0.25)
+        small_frame = cv2.resize(image, (0, 0), fx=0.25, fy=0.25)
                              
                     # Find all the faces and face encodings in the current frame of video
 
