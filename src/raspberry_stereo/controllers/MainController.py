@@ -249,7 +249,6 @@ class MainController():
                     pose = self.estimate_pose(self.registerImage, 2)
                     direction = self.estimate_direction(pose) if pose else None
                     if direction == "Straight":
-                        cv2.imwrite(f"./test.jpeg", self.registerImage)
                         self.learn_new_face()
                         self.viewRegister.learningCompletedLabel.place(x=0, y=100)
                         logging.info("Learing complete")
@@ -417,7 +416,6 @@ class MainController():
             return "Left"
     
     def learn_new_face(self):
-        obama_image = face_recognition.load_image_file("./test.jpeg")
         obama_face_encoding = face_recognition.face_encodings(self.registerImage)[0]
         self.model.new_face_encoding_temp = [obama_face_encoding]
         
