@@ -107,51 +107,51 @@ class MainController():
         self.draw_registration()
     
     def draw_idle(self):
-        #self.viewIdle.mainCameraLabel.place(x=-61, y=0)
-        #self.viewIdle.sideCameraLabel.place(x=580, y=120)
-        #self.viewIdle.registerNewFaceButton.place(x=635, y=37)
         self.viewIdle.mainCameraLabel.place(x=240, y=0)
         self.viewIdle.sideCameraLabel.place(x=0, y=120)
         self.viewIdle.registerNewFaceButton.place(x=65, y=37)
+        self.viewIdle.checkedInList.place(x=620, y=0)
         
     def hide_idle(self):
+        self.viewIdle.alreadyCheckedInLabel.place_forget()
         self.viewIdle.mainCameraLabel.place_forget()
         self.viewIdle.sideCameraLabel.place_forget()
         self.viewIdle.registerNewFaceButton.place_forget()
+        self.viewIdle.checkedInList.place_forget()
     
     def draw_registration(self):
-        self.viewRegister.sideCameraLabel.place(x=580, y=120)
-        self.viewRegister.registrationDoneButton.place(x=284, y=370)
+        self.viewRegister.sideCameraLabel.place(x=0, y=120)
+        self.viewRegister.registrationDoneButton.place(x=524, y=370)
         #self.viewRegister.registrationDoneButton["state"] = "disabled"
-        self.viewRegister.registrationCancelButton.place(x=144, y=370)
-        self.viewRegister.faceNameText.place(x=30, y=120)
-        self.viewRegister.qButton.place(x=30, y=180) 
-        self.viewRegister.wButton.place(x=80, y=180)  
-        self.viewRegister.eButton.place(x=130, y=180)  
-        self.viewRegister.rButton.place(x=180, y=180)  
-        self.viewRegister.tButton.place(x=230, y=180)  
-        self.viewRegister.yButton.place(x=280, y=180) 
-        self.viewRegister.uButton.place(x=330, y=180)
-        self.viewRegister.iButton.place(x=380, y=180)  
-        self.viewRegister.oButton.place(x=430, y=180)
-        self.viewRegister.pButton.place(x=480, y=180)
-        self.viewRegister.aButton.place(x=50, y=230) 
-        self.viewRegister.sButton.place(x=100, y=230)  
-        self.viewRegister.dButton.place(x=150, y=230)  
-        self.viewRegister.fButton.place(x=200, y=230)  
-        self.viewRegister.gButton.place(x=250, y=230)  
-        self.viewRegister.hButton.place(x=300, y=230) 
-        self.viewRegister.jButton.place(x=350, y=230)
-        self.viewRegister.kButton.place(x=400, y=230)  
-        self.viewRegister.lButton.place(x=450, y=230)
-        self.viewRegister.zButton.place(x=70, y=280) 
-        self.viewRegister.xButton.place(x=120, y=280)  
-        self.viewRegister.cButton.place(x=170, y=280)  
-        self.viewRegister.vButton.place(x=220, y=280)  
-        self.viewRegister.bButton.place(x=270, y=280)  
-        self.viewRegister.nButton.place(x=320, y=280) 
-        self.viewRegister.mButton.place(x=370, y=280)
-        self.viewRegister.backspaceButton.place(x=420, y=280)
+        self.viewRegister.registrationCancelButton.place(x=384, y=370)
+        self.viewRegister.faceNameText.place(x=270, y=120)
+        self.viewRegister.qButton.place(x=270, y=180) 
+        self.viewRegister.wButton.place(x=320, y=180)  
+        self.viewRegister.eButton.place(x=370, y=180)  
+        self.viewRegister.rButton.place(x=420, y=180)  
+        self.viewRegister.tButton.place(x=470, y=180)  
+        self.viewRegister.yButton.place(x=520, y=180) 
+        self.viewRegister.uButton.place(x=570, y=180)
+        self.viewRegister.iButton.place(x=620, y=180)  
+        self.viewRegister.oButton.place(x=670, y=180)
+        self.viewRegister.pButton.place(x=720, y=180)
+        self.viewRegister.aButton.place(x=290, y=230) 
+        self.viewRegister.sButton.place(x=340, y=230)  
+        self.viewRegister.dButton.place(x=390, y=230)  
+        self.viewRegister.fButton.place(x=440, y=230)  
+        self.viewRegister.gButton.place(x=490, y=230)  
+        self.viewRegister.hButton.place(x=540, y=230) 
+        self.viewRegister.jButton.place(x=590, y=230)
+        self.viewRegister.kButton.place(x=640, y=230)  
+        self.viewRegister.lButton.place(x=690, y=230)
+        self.viewRegister.zButton.place(x=310, y=280) 
+        self.viewRegister.xButton.place(x=360, y=280)  
+        self.viewRegister.cButton.place(x=410, y=280)  
+        self.viewRegister.vButton.place(x=460, y=280)  
+        self.viewRegister.bButton.place(x=510, y=280)  
+        self.viewRegister.nButton.place(x=560, y=280) 
+        self.viewRegister.mButton.place(x=610, y=280)
+        self.viewRegister.backspaceButton.place(x=660, y=280)
         
     def hide_registration(self):
         self.viewRegister.learningCompletedLabel.place_forget()
@@ -190,12 +190,15 @@ class MainController():
     def stream(self):
         frame_rate = 1
         prev = 0
+        timer = 0
+        yMain = 560 if logging.root.level == logging.INFO else 360
         while True:
             #logging.debug("debug")
             #logging.info("info")
             time_elapsed = time.time() - prev
-            mainImage = self.take_pic(self.mainCamera)[0:480, 0:560]
-            sideImage = self.take_pic(self.sideCamera)[0:240, 0:240]
+            mainImage = self.take_pic(self.mainCamera,480,yMain)
+            sideImage = self.take_pic(self.sideCamera,240,240)
+            self.show_checked_in_list()
             self.display_pic(self.viewIdle.mainCameraLabel,mainImage)
             self.display_pic(self.viewIdle.sideCameraLabel,sideImage)
             self.display_pic(self.viewRegister.sideCameraLabel,sideImage)
@@ -208,25 +211,43 @@ class MainController():
                         if  len(face_names1) == 1 and len(face_names2) == 1 and face_names2 == face_names1:
                             pose1 = self.estimate_pose(sideImage, 1)
                             pose2 = self.estimate_pose(mainImage, 2)
-                            self.greet(face_names1[0])
+                            name = self.model.getUserInfo(face_names1[0])
+                            if self.model.isCheckedIn(face_names1[0]):
+                                self.viewIdle.alreadyCheckedInLabel.config(text=f"{name} already checked id.")
+                                self.viewIdle.alreadyCheckedInLabel.place(x=0, y=101)
+                                timer = 1
+                            else:
+                                self.model.checkIn(face_names1[0])
+                                self.greet(name)
                 if self.registration_ongoing and self.learning_ongoing:
                     pose = self.estimate_pose(sideImage, 2)
                     direction = self.estimate_direction(pose) if pose else None
                     if direction == "Straight":
                         cv2.imwrite(f"./test.jpeg", sideImage)
                         self.learn_new_face()
-                        self.viewRegister.learningCompletedLabel.place(x=580, y=100)
+                        self.viewRegister.learningCompletedLabel.place(x=0, y=100)
                         logging.info("Learing complete")
                         self.learning_ongoing = False
                 prev = time.time()
+
+                if timer > 0 and timer < 10:
+                    timer += 1
+                else:
+                    timer = 0
+                    self.viewIdle.alreadyCheckedInLabel.place_forget()
+
                 
     def greet(self,name):
         self.hide_idle()
         self.viewIdle.welcomeMessageLabel.config(text=f"Welcome {name}")
         self.viewIdle.welcomeMessageLabel.place(x=0, y=0)
-        time.sleep(3)
+        time.sleep(2)
         self.viewIdle.welcomeMessageLabel.place_forget()
         self.draw_idle()
+
+    def show_checked_in_list(self):
+        user_name_list = self.model.get_checked_in_users()
+        self.viewIdle.checkedInList.config(text=user_name_list)
         
     def on_letter(self,letter):
         self.viewRegister.faceNameText.insert(tkinter.END, letter)
@@ -375,8 +396,9 @@ class MainController():
         obama_face_encoding = face_recognition.face_encodings(obama_image)[0]
         self.model.new_face_encoding_temp = [obama_face_encoding]
         
-    def take_pic(self,cam):
+    def take_pic(self,cam,x,y):
         success, image = cam.read()
+        image = image[0:x, 0:y]
         image = cv2.cvtColor(cv2.flip(image, 1), cv2.COLOR_BGR2RGB)
         image = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
         return image
