@@ -112,7 +112,6 @@ class MainController():
         self.viewIdle.registerNewFaceButton.place(x=65, y=37)
         
     def hide_idle(self):
-        self.alreadyCheckedInLabel.place_forget()
         self.viewIdle.mainCameraLabel.place_forget()
         self.viewIdle.sideCameraLabel.place_forget()
         self.viewIdle.registerNewFaceButton.place_forget()
