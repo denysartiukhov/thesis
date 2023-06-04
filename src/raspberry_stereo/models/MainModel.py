@@ -100,4 +100,5 @@ class MainModel():
             rows2 = cursor.fetchall()
             for row2 in rows2:
                 user_name_list += row2[0]
-        print(user_name_list)
+                user_name_list += "\n"
+        return user_name_list
