@@ -246,6 +246,7 @@ class MainController():
 
     def show_checked_in_list(self):
         self.viewIdle.checkedInList.place(x=620, y=0)
+        self.model.get_checked_in_users
         
     def on_letter(self,letter):
         self.viewRegister.faceNameText.insert(tkinter.END, letter)

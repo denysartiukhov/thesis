@@ -89,4 +89,11 @@ class MainModel():
             ids.append(idsList)
         logging.debug(f"Encodings fetched from DB.")
         return encodings, ids
+
+    def get_checked_in_users():
+        sqliteConnection = sqlite3.connect('raspberry.db')
+        cursor = sqliteConnection.cursor()
+        cursor.execute(f"SELECT first_name FROM checked_in;")
+        rows = cursor.fetchall()
+        print(rows)
         
