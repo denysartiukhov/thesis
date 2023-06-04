@@ -381,6 +381,7 @@ class MainController():
                 y = angles[1] * 360
                 x = '%.3f'%(x)
                 y = '%.3f'%(y)
+                print(x,y)
 
                 return tuple([x, y])
     
