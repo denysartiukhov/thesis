@@ -226,21 +226,16 @@ class MainController():
             #logging.debug("debug")
             #logging.info("info")
             time_elapsed = time.time() - prev
-            #mainImage = cv2.imread("/home/dartiukhov/Desktop/thesis_clean/thesis/far_straight1_c2.jpg")
-            #sideImage = cv2.imread("/home/dartiukhov/Desktop/thesis_clean/thesis/far_straight2_c1.jpg")
-            #registerImage = cv2.imread("/home/dartiukhov/Desktop/thesis_clean/thesis/far_straight2_c1.jpg")
-            mainImage = cv2.imread("/home/dartiukhov/Desktop/thesis_clean/thesis/set2/Bisera/bright/JPEGs/far_straight1.jpg")
-            sideImage = cv2.imread("/home/dartiukhov/Desktop/thesis_clean/thesis/set2/Bisera/bright/JPEGs/far_straight2.jpg")
-            registerImage = cv2.imread("/home/dartiukhov/Desktop/thesis_clean/thesis/set2/Bisera/bright/JPEGs/far_straight2.jpg")
+            mainImage = cv2.imread("/home/dartiukhov/Desktop/thesis_clean/thesis/far_straight1_c2.jpg")
+            #mainImage = self.take_pic(self.mainCamera,480,yMain)
+            sideImage = cv2.imread("/home/dartiukhov/Desktop/thesis_clean/thesis/far_straight2_c1.jpg")
+            registerImage = cv2.imread("/home/dartiukhov/Desktop/thesis_clean/thesis/far_straight2_c1.jpg")
             self.show_checked_in_list()
             self.display_pic(self.viewIdle.mainCameraLabel,mainImage)
             self.display_pic(self.viewIdle.sideCameraLabel,sideImage)
             self.display_pic(self.viewRegister.sideCameraLabel,registerImage)
             
             if time_elapsed > 1./frame_rate:
-                sideImage = face_recognition.load_image_file("/home/dartiukhov/Desktop/thesis_clean/thesis/far_straight2_c1.jpg", mode='L')
-                mainImage = face_recognition.load_image_file("/home/dartiukhov/Desktop/thesis_clean/thesis/far_straight1_c2.jpg", mode='L')
-                registerImage = face_recognition.load_image_file("/home/dartiukhov/Desktop/thesis_clean/thesis/far_straight2_c1.jpg", mode='L')
                 face_names2, face_locations2 = self.find_faces(sideImage)
                 if face_names2 != [] and face_names2 != ["Unknown"] and face_names2 and not self.registration_ongoing:
                     face_names1, face_locations1 = self.find_faces(mainImage)
@@ -308,8 +303,7 @@ class MainController():
 
         face_locations = face_recognition.face_locations(small_frame)
         print(face_locations)
-        small_frame = small_frame[:,:,newaxis]
-        face_encodings = face_recognition.face_encodings(small_frame.repeat(3, 2), face_locations)
+        face_encodings = face_recognition.face_encodings(small_frame, face_locations)
 
         face_names = []
         for face_encoding in face_encodings:
@@ -429,7 +423,7 @@ class MainController():
             return "Left"
     
     def learn_new_face(self):
-        obama_image = face_recognition.load_image_file("./test.jpeg", mode='L')
+        obama_image = face_recognition.load_image_file("./test.jpeg")
         obama_face_encoding = face_recognition.face_encodings(obama_image)[0]
         self.model.new_face_encoding_temp = [obama_face_encoding]
         
