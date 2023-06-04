@@ -193,7 +193,7 @@ class MainController():
             #logging.debug("debug")
             #logging.info("info")
             time_elapsed = time.time() - prev
-            mainImage = self.take_pic(self.mainCamera,480,560)
+            mainImage = self.take_pic(self.mainCamera,480,480)
             sideImage = self.take_pic(self.sideCamera,240,240)
             self.show_checked_in_list()
             self.display_pic(self.viewIdle.mainCameraLabel,mainImage)
