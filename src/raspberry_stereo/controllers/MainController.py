@@ -238,13 +238,13 @@ class MainController():
                             if  len(face_names_main) == 1 and face_names_side == face_names_main:
                                 pose_side = self.estimate_pose(self.sideImage, 1)
                                 pose_main = self.estimate_pose(self.mainImage, 2)
-                                name = self.model.getUserInfo(face_names_main[0])
+                                user_first_name = self.model.getUserInfo(face_names_main[0])
                                 if self.model.isCheckedIn(face_names_main[0]):
-                                    self.viewIdle.alreadyCheckedInLabel.config(text=f"{name} already checked id.", bg="green")
+                                    self.viewIdle.alreadyCheckedInLabel.config(text=f"{user_first_name} already checked id.", bg="green")
                                     timer = 1
                                 else:
                                     self.model.checkIn(face_names_main[0])
-                                    self.greet(name)
+                                    self.greet(user_first_name)
                 if self.registration_ongoing and self.learning_ongoing:
                     pose = self.estimate_pose(self.registerImage, 2)
                     direction = self.estimate_direction(pose) if pose else None
@@ -418,7 +418,7 @@ class MainController():
     
     def learn_new_face(self):
         obama_image = face_recognition.load_image_file("./test.jpeg")
-        obama_face_encoding = face_recognition.face_encodings(obama_image)[0]
+        obama_face_encoding = face_recognition.face_encodings(self.registerImage)[0]
         self.model.new_face_encoding_temp = [obama_face_encoding]
         
     def take_pic(self,cam,x,y):
