@@ -228,7 +228,6 @@ class MainController():
                         self.learning_ongoing = False
                 prev = time.time()
 
-                print(timer)
                 if timer > 0 and timer < 10:
                     timer += 1
                 else:

@@ -67,7 +67,6 @@ class MainModel():
         cursor = sqliteConnection.cursor()
         cursor.execute(f"SELECT first_name FROM users WHERE id = '{id}';")
         rows = cursor.fetchall()
-        print(rows)
         sqliteConnection.close()
         if len(rows) == 0:
             return None
