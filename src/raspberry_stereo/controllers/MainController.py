@@ -389,7 +389,7 @@ class MainController():
                 return tuple([x, y])
     
     def estimate_direction(self,pose_estimate):
-        if float(pose_estimate[0]) > -15 and float(pose_estimate[0]) < 15 and float(pose_estimate[1]) > -10 and float(pose_estimate[1]) < 10:
+        if float(pose_estimate[0]) > -20 and float(pose_estimate[0]) < 20 and float(pose_estimate[1]) > -20 and float(pose_estimate[1]) < 20:
             print("Straight")
             return "Straight"
         elif float(pose_estimate[0]) > -15 and float(pose_estimate[0]) < 15 and float(pose_estimate[1]) < -10:
