@@ -160,7 +160,7 @@ class MainController():
         self.viewRegister.sixButton.place(x=570, y=160)
         self.viewRegister.sevenButton.place(x=620, y=160)
         self.viewRegister.eightButton.place(x=670, y=160)
-        self.viewRegister.nineButton.place(x=720, y=280)
+        self.viewRegister.nineButton.place(x=720, y=210)
         self.viewRegister.backspaceButton.place(x=660, y=310)
         
     def hide_registration(self):
