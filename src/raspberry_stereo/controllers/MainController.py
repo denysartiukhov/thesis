@@ -135,7 +135,6 @@ class MainController():
     def draw_registration(self):
         self.viewRegister.sideCameraLabel.place(x=0, y=120)
         self.viewRegister.registrationDoneButton.place(x=524, y=370)
-        #self.viewRegister.registrationDoneButton["state"] = "disabled"
         self.viewRegister.registrationCancelButton.place(x=384, y=370)
         self.viewRegister.faceNameText.place(x=270, y=120)
         self.viewRegister.qButton.place(x=270, y=210) 
@@ -224,19 +223,8 @@ class MainController():
         frame_rate = 1
         prev = 0
         timer = 0
-        yMain = 560 if logging.root.level == logging.INFO else 360
         while True:
-            if not self.args.train_from_source:
-                self.mainImage = self.take_pic(self.mainCamera,480,yMain)
-                self.sideImage = self.take_pic(self.sideCamera,240,240)
-                self.registerImage = self.sideImage
-            else:
-                self.mainImage = cv2.imread("/home/dartiukhov/Desktop/thesis_clean/thesis/far_straight1_c.jpg")
-                self.sideImage = cv2.imread("/home/dartiukhov/Desktop/thesis_clean/thesis/far_straight2_c.jpg")
-                self.registerImage = cv2.imread("/home/dartiukhov/Desktop/thesis_clean/thesis/D_bright_c.jpg")
-            self.display_pic(self.viewIdle.mainCameraLabel,self.mainImage)
-            self.display_pic(self.viewIdle.sideCameraLabel,self.sideImage)
-            self.display_pic(self.viewRegister.sideCameraLabel,self.registerImage)
+            take_pic2(self)
             time_elapsed = time.time() - prev
             self.update_checked_in_list()
             
@@ -437,6 +425,20 @@ class MainController():
         image = cv2.cvtColor(cv2.flip(image, 1), cv2.COLOR_BGR2RGB)
         image = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
         return image
+    
+    def take_pic2(self):
+        yMain = 560 if logging.root.level == logging.INFO else 360
+        if not self.args.train_from_source:
+            self.mainImage = self.take_pic(self.mainCamera,480,yMain)
+            self.sideImage = self.take_pic(self.sideCamera,240,240)
+            self.registerImage = self.sideImage
+        else:
+            self.mainImage = cv2.imread("/home/dartiukhov/Desktop/thesis_clean/thesis/far_straight1_c.jpg")
+            self.sideImage = cv2.imread("/home/dartiukhov/Desktop/thesis_clean/thesis/far_straight2_c.jpg")
+            self.registerImage = cv2.imread("/home/dartiukhov/Desktop/thesis_clean/thesis/D_bright_c.jpg")
+        self.display_pic(self.viewIdle.mainCameraLabel,self.mainImage)
+        self.display_pic(self.viewIdle.sideCameraLabel,self.sideImage)
+        self.display_pic(self.viewRegister.sideCameraLabel,self.registerImage)
 
     def display_pic(self,label,image):
         image1 = Image.fromarray(image)
