@@ -13,11 +13,17 @@ def setup_command_line_parser():
         action="store_true",
         help="Run app in debug mode"
     )
+    parser.add_argument(
+        "--train-from-source",
+        action="store_true",
+        help="Train and test system from dataset"
+    )
     args = parser.parse_args()
     return args
 
 if __name__ == '__main__':
     args = setup_command_line_parser()
+    if args.train-from-source
     if args.debug:
         logging.basicConfig(level = logging.DEBUG, format='%(asctime)s [%(levelname)s] %(message)s')
     else:
