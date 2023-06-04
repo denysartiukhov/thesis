@@ -118,7 +118,7 @@ class MainController():
         self.viewIdle.registerNewFaceButton.place_forget()
     
     def draw_registration(self):
-        self.viewRegister.sideCameraLabel.place(x=580, y=120)
+        self.viewRegister.sideCameraLabel.place(x=0, y=120)
         self.viewRegister.registrationDoneButton.place(x=284, y=370)
         #self.viewRegister.registrationDoneButton["state"] = "disabled"
         self.viewRegister.registrationCancelButton.place(x=144, y=370)
