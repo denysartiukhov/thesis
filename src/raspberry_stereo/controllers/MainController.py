@@ -207,6 +207,7 @@ class MainController():
             
             if time_elapsed > 1./frame_rate:
                 face_names2, face_locations2 = self.find_faces(sideImage)
+                print(face_names2)
                 if face_names2 != [] and face_names2 != ["Unknown"] and face_names2 and not self.registration_ongoing:
                     face_names1, face_locations1 = self.find_faces(mainImage)
                     if face_names1 != [] and face_names1 != ["Unknown"] and face_names1:
