@@ -230,13 +230,13 @@ class MainController():
                 self.mainImage = self.take_pic(self.mainCamera,480,yMain)
                 self.sideImage = self.take_pic(self.sideCamera,240,240)
                 self.registerImage = self.sideImage
-                self.display_pic(self.viewIdle.mainCameraLabel,self.mainImage)
-                self.display_pic(self.viewIdle.sideCameraLabel,self.sideImage)
-                self.display_pic(self.viewRegister.sideCameraLabel,self.registerImage)
             else:
                 self.mainImage = cv2.imread("/home/dartiukhov/Desktop/thesis_clean/thesis/far_straight1_c2.jpg")
                 self.sideImage = cv2.imread("/home/dartiukhov/Desktop/thesis_clean/thesis/far_straight2_c1.jpg")
-                self.registerImage = cv2.imread("/home/dartiukhov/Desktop/thesis_clean/thesis/far_straight2_c1.jpg")
+                self.registerImage = cv2.imread("/home/dartiukhov/Desktop/thesis_clean/thesis/D_bright_c.jpg")
+            self.display_pic(self.viewIdle.mainCameraLabel,self.mainImage)
+            self.display_pic(self.viewIdle.sideCameraLabel,self.sideImage)
+            self.display_pic(self.viewRegister.sideCameraLabel,self.registerImage)
             time_elapsed = time.time() - prev
             self.update_checked_in_list()
             
