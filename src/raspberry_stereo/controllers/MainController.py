@@ -228,9 +228,6 @@ class MainController():
 
             self.capture_frames()
             self.update_checked_in_list()
-            pose_side = self.estimate_pose(self.sideImage, 1)
-            pose_main = self.estimate_pose(self.mainImage, 2)
-            logging.debug(f"{pose_side}, {pose_main}")
             
             if time_elapsed > 1./frame_rate:
                 if not self.registration_ongoing:
@@ -241,7 +238,8 @@ class MainController():
                             if  len(face_names_main) == 1 and face_names_side == face_names_main:
                                 pose_side = self.estimate_pose(self.sideImage, 1)
                                 pose_main = self.estimate_pose(self.mainImage, 2)
-                                logging.debug(f"{pose_side}, {pose_main}")
+                                angle_difference = pose_side[1] - pose_main[1]
+                                logging.debug(f"{angle_difference}")
                                 user_first_name = self.model.getUserInfo(face_names_main[0])
                                 if self.model.isCheckedIn(face_names_main[0]):
                                     self.viewIdle.alreadyCheckedInLabel.config(text=f"{user_first_name} already checked id.", bg="green")
