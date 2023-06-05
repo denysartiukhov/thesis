@@ -19,7 +19,7 @@ import numpy as np
 
 folder = "Bisera_JPEGs_color"
 #light = "bright"
-light = "half_bright"
+light = "half-bright"
 #light = "half_dark"
 distance = "far"
 pose = "right"
