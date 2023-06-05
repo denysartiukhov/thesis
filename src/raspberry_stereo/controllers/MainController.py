@@ -22,7 +22,7 @@ light = "bright"
 #light = "half-bright"
 #light = "half-dark"
 #light = "ultra-dark"
-distance = "far"
+distance = "close"
 pose = "straight"
 person = "D"
 
