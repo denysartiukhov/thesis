@@ -18,8 +18,8 @@ import mediapipe as mp
 import numpy as np
 
 folder = "Denys_JPEGs_color"
-light = "bright"
-#light = "half-bright"
+#light = "bright"
+light = "half-bright"
 #light = "half-dark"
 #light = "ultra-dark"
 distance = "close"
