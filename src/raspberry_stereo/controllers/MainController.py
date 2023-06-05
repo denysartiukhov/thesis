@@ -23,7 +23,7 @@ folder = "Bisera_JPEGs_color"
 #light = "half-dark"
 light = "ultra-dark"
 distance = "close"
-pose = "straight"
+pose = "right"
 person = "B"
 
 
