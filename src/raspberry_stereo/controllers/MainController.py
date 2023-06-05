@@ -23,7 +23,7 @@ folder = "Denys_JPEGs_color"
 #light = "half-dark"
 light = "ultra-dark"
 distance = "close"
-pose = "right"
+pose = "straight"
 person = "D"
 
 
