@@ -22,8 +22,8 @@ folder = "Denys_JPEGs_color"
 #light = "half-bright"
 #light = "half-dark"
 light = "ultra-dark"
-distance = "far"
-pose = "straight"
+distance = "close"
+pose = "left"
 person = "D"
 
 
