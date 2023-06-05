@@ -22,7 +22,7 @@ light = "bright"
 #light = "half_bright"
 #light = "half_dark"
 distance = "close"
-pose = "right"
+pose = "left"
 person = "B"
 
 
