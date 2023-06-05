@@ -18,10 +18,10 @@ import mediapipe as mp
 import numpy as np
 
 folder = "Denys_JPEGs_color"
-#light = "bright"
+light = "bright"
 #light = "half-bright"
 #light = "half-dark"
-light = "ultra-dark"
+#light = "ultra-dark"
 distance = "close"
 pose = "straight"
 person = "D"
@@ -435,8 +435,10 @@ class MainController():
             self.sideImage = self.take_pic(self.sideCamera,240,240)
             self.registerImage = self.sideImage
         else:
-            self.mainImage = cv2.imread(f"/home/dartiukhov/Desktop/thesis_clean/thesis/{folder}/set2/{light}_color/{distance}_{pose}2_c.jpg")
-            self.sideImage = cv2.imread(f"/home/dartiukhov/Desktop/thesis_clean/thesis/{folder}/set2/{light}_color/{distance}_{pose}1_c.jpg")
+            #self.mainImage = cv2.imread(f"/home/dartiukhov/Desktop/thesis_clean/thesis/{folder}/set2/{light}_color/{distance}_{pose}2_c.jpg")
+            #self.sideImage = cv2.imread(f"/home/dartiukhov/Desktop/thesis_clean/thesis/{folder}/set2/{light}_color/{distance}_{pose}1_c.jpg")
+            self.mainImage = cv2.imread(f"/home/dartiukhov/Desktop/thesis_clean/thesis/{folder}/set1/{person}_{light}_c.jpg")
+            self.sideImage = cv2.imread(f"/home/dartiukhov/Desktop/thesis_clean/thesis/{folder}/set1/{person}_{light}_c.jpg")
             self.registerImage = cv2.imread(f"/home/dartiukhov/Desktop/thesis_clean/thesis/{folder}/set1/{person}_{light}_c.jpg")
         self.display_pic(self.viewIdle.mainCameraLabel,self.mainImage)
         self.display_pic(self.viewIdle.sideCameraLabel,self.sideImage)
