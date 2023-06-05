@@ -17,14 +17,14 @@ import face_recognition
 import mediapipe as mp
 import numpy as np
 
-folder = "Bisera_JPEGs_color"
-#light = "bright"
+folder = "Denys_JPEGs_color"
+light = "bright"
 #light = "half-bright"
 #light = "half-dark"
-light = "ultra-dark"
-distance = "close"
-pose = "straight"
-person = "B"
+#light = "ultra-dark"
+distance = "far"
+pose = "left"
+person = "D"
 
 
 class MainController():
