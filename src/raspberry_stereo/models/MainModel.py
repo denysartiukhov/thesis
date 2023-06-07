@@ -38,11 +38,11 @@ class MainModel():
             logging.debug("Face encodings table already exists, nothing to do.")
 
         
-    def saveEncoding(self, id, encoding):
+    def save_encoding(self, id, encoding):
         self.cursor.executescript(f"INSERT INTO faces(id, encoding) VALUES('{id}', '{encoding}')")
         logging.debug(f"Encoding for id={id} saved to DB.")
     
-    def isCheckedIn(self, id):
+    def is_checked_in(self, id):
         sqliteConnection = sqlite3.connect('raspberry.db')
         cursor = sqliteConnection.cursor()
         cursor.execute(f"SELECT * FROM checked_in WHERE id = '{id}';")
@@ -53,14 +53,14 @@ class MainModel():
         else:
             return True
 
-    def checkIn(self, id):
+    def check_in(self, id):
         sqliteConnection = sqlite3.connect('raspberry.db')
         cursor = sqliteConnection.cursor()
         cursor.executescript(f"INSERT INTO checked_in(id) VALUES('{id}')")
         sqliteConnection.close()
         logging.debug(f"User id={id} checked in for the day.")
 
-    def getUserInfo(self, id):
+    def get_user_info(self, id):
         sqliteConnection = sqlite3.connect('raspberry.db')
         cursor = sqliteConnection.cursor()
         cursor.execute(f"SELECT first_name FROM users WHERE id = '{id}';")
@@ -71,7 +71,7 @@ class MainModel():
         for row in rows:
             return row[0]
         
-    def getEncodings(self):
+    def get_encodings(self):
         sqliteConnection = sqlite3.connect('raspberry.db')
         cursor = sqliteConnection.cursor()
         cursor.execute(f"SELECT * FROM faces;")
