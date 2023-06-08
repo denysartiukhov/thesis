@@ -2,7 +2,7 @@ import tkinter
 
 class ViewIdle():
     def __init__(self,root):
-        self.checked_in_list_header_label = tkinter.Label(root, text="Users checked in for today:", borderwidth=0, bg="black", fg="white")
+        self.checked_in_list_header_label = tkinter.Label(root, text="Zalogowani użytkownicy dzisiaj:", borderwidth=0, bg="black", fg="white")
         self.already_checked_in_label = tkinter.Label(root, text="", borderwidth=0, bg="black", fg="white")
         self.checked_in_list_label = tkinter.Label(root, text="", borderwidth=0, bg="black", fg="white", justify=tkinter.LEFT)
         self.main_camera_label = tkinter.Label(root, borderwidth=0)
