@@ -126,7 +126,7 @@ class MainController():
         self.draw_registration()
     
     def draw_idle(self):
-        self.view_idle.already_checked_in_header_label.place(x=0, y=101)
+        self.view_idle.already_checked_in_label.place(x=0, y=101)
         self.view_idle.main_camera_label.place(x=240, y=0)
         self.view_idle.side_camera_label.place(x=0, y=120)
         self.view_idle.register_new_face_button.place(x=65, y=37)
