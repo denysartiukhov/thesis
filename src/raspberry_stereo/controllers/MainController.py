@@ -130,8 +130,8 @@ class MainController():
         self.view_idle.main_camera_label.place(x=240, y=0)
         self.view_idle.side_camera_label.place(x=0, y=120)
         self.view_idle.register_new_face_button.place(x=65, y=37)
-        self.view_idle.checked_in_list_label.place(x=620, y=20)
-        self.view_idle.checked_in_list_header_label.place(x=620, y=0)
+        self.view_idle.checked_in_list_label.place(x=610, y=40)
+        self.view_idle.checked_in_list_header_label.place(x=610, y=0)
         
     def hide_idle(self):
         self.view_idle.already_checked_in_label.place_forget()
