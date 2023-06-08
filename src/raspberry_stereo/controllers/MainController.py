@@ -283,10 +283,10 @@ class MainController():
                 
     def greet(self,name):
         self.hide_idle()
-        self.view_idle.welcomeMessageLabel.config(text=f"Welcome {name}")
-        self.view_idle.welcomeMessageLabel.place(x=0, y=0)
+        self.view_idle.welcome_message_label.config(text=f"Welcome {name}")
+        self.view_idle.welcome_message_label.place(x=0, y=0)
         time.sleep(2)
-        self.view_idle.welcomeMessageLabel.place_forget()
+        self.view_idle.welcome_message_label.place_forget()
         self.draw_idle()
 
     def update_checked_in_list(self):
