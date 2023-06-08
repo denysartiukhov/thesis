@@ -261,7 +261,7 @@ class MainController():
                                     self.view_idle.already_checked_in_label.config(text=f"{user_first_name} already checked id.", bg="green")
                                     timer = 1
                                 elif angle_difference > 10:
-                                    logging.debug(f"{user_first_name} has not been checked id yet. Checking in...", bg="green")
+                                    logging.debug(f"{user_first_name} has not been checked id yet. Checking in...")
                                     self.model.check_in(face_names_main[0])
                                     self.greet(user_first_name)
                 if self.registration_ongoing and self.learning_ongoing:
