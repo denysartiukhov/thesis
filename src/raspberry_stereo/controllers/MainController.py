@@ -286,7 +286,7 @@ class MainController():
                 
     def greet(self,name):
         self.hide_idle()
-        self.view_idle.welcome_message_label.config(text=f"Welcome {name}")
+        self.view_idle.welcome_message_label.config(text=f"Cześć {name}!")
         self.view_idle.welcome_message_label.place(x=0, y=0)
         time.sleep(2)
         self.view_idle.welcome_message_label.place_forget()
