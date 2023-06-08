@@ -251,6 +251,7 @@ class MainController():
                                 logging.debug(f"Face found in the main frame.")
                                 pose_side = self.estimate_pose(self.side_image, 1)
                                 pose_main = self.estimate_pose(self.main_image, 2)
+                                angle_difference = None
                                 try:
                                     angle_difference = float(pose_side[1]) - float(pose_main[1])
                                     logging.debug(f"The angle difference between side frame and main frame is {angle_difference}.")
@@ -260,7 +261,7 @@ class MainController():
                                 if self.model.is_checked_in(face_names_main[0]):
                                     self.view_idle.already_checked_in_label.config(text=f"{user_first_name} already checked id.", bg="green")
                                     timer = 1
-                                elif angle_difference > 10:
+                                elif angle_difference != None and angle_difference > 10:
                                     logging.debug(f"{user_first_name} has not been checked id yet. Checking in...")
                                     self.model.check_in(face_names_main[0])
                                     self.greet(user_first_name)
