@@ -261,7 +261,7 @@ class MainController():
                                     logging.debug(f"Cannot estimate angle difference between side frame and main frame.")
                                 user_first_name = self.model.get_user_info(face_names_main[0])
                                 if self.model.is_checked_in(face_names_main[0]):
-                                    self.view_idle.already_checked_in_label.config(text=f"{user_first_name} already checked id.", bg="green")
+                                    self.view_idle.already_checked_in_label.config(text=f"{user_first_name} już jest zalogowany.", bg="green")
                                     timer = 1
                                 elif angle_difference != None and angle_difference > 10:
                                     logging.debug(f"{user_first_name} has not been checked id yet. Checking in...")

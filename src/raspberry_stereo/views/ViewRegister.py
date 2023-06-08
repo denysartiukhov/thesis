@@ -2,11 +2,11 @@ import tkinter
 
 class ViewRegister():
     def __init__(self,root):
-        self.learning_completed_label = tkinter.Label(root, text="Learning completed.", borderwidth=0, bg="green", fg="white")
+        self.learning_completed_label = tkinter.Label(root, text="Uczenie się zakończone.", borderwidth=0, bg="green", fg="white")
         self.registration_instructions_label = tkinter.Label(root, text="Wprowadź swój unikalny identyfikator użytkownika. Postaw się przed kamerą i patrz prosto w obiektyw.\nPoczekaj, aż system zarejestruje Twoją twarz. Może to zająć kilka sekund.\nPo pomyślnym zarejestrowaniu twarzy zobaczysz wiadomość potwierdzającą,\nże system poprawnie nauczył się Twojej twarzy.", borderwidth=0, bg="black", fg="white", justify=tkinter.CENTER)
         self.side_camera_label = tkinter.Label(root, borderwidth=0)
-        self.registration_done_button = tkinter.Button(root, text='Done', width=10, relief="flat", bg="white", font="tahoma")
-        self.registration_cancel_button = tkinter.Button(root, text='Cancel', width=10, relief="flat", bg="white", font="tahoma")
+        self.registration_done_button = tkinter.Button(root, text='Gotowe', width=10, relief="flat", bg="white", font="tahoma")
+        self.registration_cancel_button = tkinter.Button(root, text='Anuluj', width=10, relief="flat", bg="white", font="tahoma")
         self.a_button = tkinter.Button(root, text='A', width=1, relief="flat", bg="white", font="tahoma")
         self.b_button = tkinter.Button(root, text='B', width=1, relief="flat", bg="white", font="tahoma")
         self.c_button = tkinter.Button(root, text='C', width=1, relief="flat", bg="white", font="tahoma")
