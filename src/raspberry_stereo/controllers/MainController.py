@@ -142,7 +142,7 @@ class MainController():
         self.view_idle.checked_in_list_header_label.place_forget()
     
     def draw_registration(self):
-        self.view_register.registration_instructions_label.place(x=10, y=10)
+        self.view_register.registration_instructions_label.place(x=50, y=10)
         self.view_register.side_camera_label.place(x=0, y=120)
         self.view_register.registration_done_button.place(x=524, y=370)
         self.view_register.registration_cancel_button.place(x=384, y=370)
