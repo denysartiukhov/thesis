@@ -126,18 +126,20 @@ class MainController():
         self.draw_registration()
     
     def draw_idle(self):
-        self.view_idle.already_checked_in_label.place(x=0, y=101)
+        self.view_idle.already_checked_in_label_header.place(x=0, y=101)
         self.view_idle.main_camera_label.place(x=240, y=0)
         self.view_idle.side_camera_label.place(x=0, y=120)
         self.view_idle.register_new_face_button.place(x=65, y=37)
-        self.view_idle.checked_in_list.place(x=620, y=0)
+        self.view_idle.checked_in_list_label.place(x=620, y=20)
+        self.view_idle.checked_in_list_header_label.place(x=620, y=0)
         
     def hide_idle(self):
         self.view_idle.already_checked_in_label.place_forget()
         self.view_idle.main_camera_label.place_forget()
         self.view_idle.side_camera_label.place_forget()
         self.view_idle.register_new_face_button.place_forget()
-        self.view_idle.checked_in_list.place_forget()
+        self.view_idle.checked_in_list_label.place_forget()
+        self.view_idle.checked_in_list_header_label.place_forget()
     
     def draw_registration(self):
         self.view_register.side_camera_label.place(x=0, y=120)
@@ -289,7 +291,7 @@ class MainController():
 
     def update_checked_in_list(self):
         user_name_list = self.model.get_checked_in_users()
-        self.view_idle.checked_in_list.config(text=user_name_list)
+        self.view_idle.checked_in_list_label.config(text=user_name_list)
         
     def on_letter(self,letter):
         self.view_register.face_name_text.insert(tkinter.END, letter)
