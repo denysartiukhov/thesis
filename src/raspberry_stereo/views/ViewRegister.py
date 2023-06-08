@@ -3,6 +3,7 @@ import tkinter
 class ViewRegister():
     def __init__(self,root):
         self.learning_completed_label = tkinter.Label(root, text="Learning completed.", borderwidth=0, bg="green", fg="white")
+        self.registration_instructions_label = tkinter.Label(root, text="Learning completed.", borderwidth=0, bg="green", fg="white")
         self.side_camera_label = tkinter.Label(root, borderwidth=0)
         self.registration_done_button = tkinter.Button(root, text='Done', width=10, relief="flat", bg="white", font="tahoma")
         self.registration_cancel_button = tkinter.Button(root, text='Cancel', width=10, relief="flat", bg="white", font="tahoma")
