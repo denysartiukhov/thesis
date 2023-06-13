@@ -10,6 +10,7 @@ import numpy as np
 import sqlite3
 import logging
 
+
 class MainModel():
     def __init__(self):
         self.new_face_encoding_temp = []
@@ -42,6 +43,7 @@ class MainModel():
         self.cursor.executescript(f"INSERT INTO faces(id, encoding) VALUES('{id}', '{encoding}')")
         logging.debug(f"Encoding for id={id} saved to DB.")
     
+
     def is_checked_in(self, id):
         sqliteConnection = sqlite3.connect('raspberry.db')
         cursor = sqliteConnection.cursor()
@@ -53,12 +55,14 @@ class MainModel():
         else:
             return True
 
+
     def check_in(self, id):
         sqliteConnection = sqlite3.connect('raspberry.db')
         cursor = sqliteConnection.cursor()
         cursor.executescript(f"INSERT INTO checked_in(id) VALUES('{id}')")
         sqliteConnection.close()
         logging.debug(f"User id={id} checked in for the day.")
+
 
     def get_user_info(self, id):
         sqliteConnection = sqlite3.connect('raspberry.db')
@@ -71,6 +75,7 @@ class MainModel():
         for row in rows:
             return row[0]
         
+
     def get_encodings(self):
         sqliteConnection = sqlite3.connect('raspberry.db')
         cursor = sqliteConnection.cursor()
@@ -89,6 +94,7 @@ class MainModel():
             ids.append(idsList)
         logging.debug(f"Encodings fetched from DB.")
         return encodings, ids
+
 
     def get_checked_in_users(self):
         sqliteConnection = sqlite3.connect('raspberry.db')

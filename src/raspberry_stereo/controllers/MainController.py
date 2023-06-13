@@ -18,14 +18,9 @@ from raspberry_stereo.views.ViewIdle import ViewIdle
 from raspberry_stereo.views.ViewRegister import ViewRegister
 from raspberry_stereo.models.MainModel import MainModel
 
-folder = "Denys_JPEGs_color"
-#light = "bright"
-light = "half-bright"
-#light = "half-dark"
-#light = "ultra-dark"
-distance = "close"
-pose = "straight"
-person = "D"
+path_to_main_image = ""
+path_to_side_image = ""
+path_to_register_image = ""
 
 
 class MainController():
@@ -96,15 +91,16 @@ class MainController():
         self.draw_idle()
 
         
-          
     def run(self):
         self.thread.start()
         self.root.mainloop()
+    
     
     def close(self):
         self.root.destroy()
         sys.exit()
     
+
     def complete_registration(self, event):
         text = self.view_register.face_name_text.get("1.0",tkinter.END)
         self.model.save_encoding(text, self.model.new_face_encoding_temp[0])
@@ -112,6 +108,7 @@ class MainController():
         self.view_register.face_name_text.delete("1.0", tkinter.END)
         self.exit_registration(event)
         
+
     def exit_registration(self, event):
         self.view_register.face_name_text.delete("1.0", tkinter.END)
         self.registration_ongoing = False
@@ -119,12 +116,14 @@ class MainController():
         self.hide_registration()
         self.draw_idle()
     
+
     def start_registration(self, event):
         self.learning_ongoing = True
         self.registration_ongoing = True
         self.hide_idle()
         self.draw_registration()
     
+
     def draw_idle(self):
         self.view_idle.already_checked_in_label.place(x=0, y=101)
         self.view_idle.main_camera_label.place(x=240, y=0)
@@ -133,6 +132,7 @@ class MainController():
         self.view_idle.checked_in_list_label.place(x=610, y=40)
         self.view_idle.checked_in_list_header_label.place(x=610, y=0)
         
+
     def hide_idle(self):
         self.view_idle.already_checked_in_label.place_forget()
         self.view_idle.main_camera_label.place_forget()
@@ -141,6 +141,7 @@ class MainController():
         self.view_idle.checked_in_list_label.place_forget()
         self.view_idle.checked_in_list_header_label.place_forget()
     
+
     def draw_registration(self):
         self.view_register.registration_instructions_label.place(x=50, y=10)
         self.view_register.side_camera_label.place(x=0, y=120)
@@ -185,6 +186,7 @@ class MainController():
         self.view_register.nine_button.place(x=720, y=160)
         self.view_register.backspace_button.place(x=660, y=310)
         
+
     def hide_registration(self):
         self.view_register.registration_instructions_label.place_forget()
         self.view_register.learning_completed_label.place_forget()
@@ -230,6 +232,7 @@ class MainController():
         self.view_register.nine_button.place_forget()
         self.view_register.backspace_button.place_forget()
         
+
     def stream(self):
         frame_rate = 1
         prev = 0
@@ -292,19 +295,23 @@ class MainController():
         self.view_idle.welcome_message_label.place_forget()
         self.draw_idle()
 
+
     def update_checked_in_list(self):
         user_name_list = self.model.get_checked_in_users()
         self.view_idle.checked_in_list_label.config(text=user_name_list)
         
+
     def on_letter(self,letter):
         self.view_register.face_name_text.insert(tkinter.END, letter)
         
+
     def on_backspace(self,event):
         text = self.view_register.face_name_text.get("1.0",tkinter.END)
         text = text[:-2]
         self.view_register.face_name_text.delete(f"1.0", tkinter.END)
         self.view_register.face_name_text.insert(tkinter.END, text)
         
+
     def find_faces(self, image):
         encodings, names = self.model.get_encodings()
         encodings = np.array(encodings)
@@ -313,16 +320,12 @@ class MainController():
         face_names = []
   
         small_frame = cv2.resize(image, (0, 0), fx=0.25, fy=0.25)
-                             
-        # Find all the faces and face encodings in the current frame of video
-
         face_locations = face_recognition.face_locations(small_frame)
         face_encodings = face_recognition.face_encodings(small_frame, face_locations)
 
         for face_encoding in face_encodings:
             matches = face_recognition.compare_faces(encodings, face_encoding)
             name = "Unknown"
-            # Use the known face with the smallest distance to the new face
             if not encodings == []:
                 face_distances = face_recognition.face_distance(encodings, face_encoding)
                 try:
@@ -331,11 +334,9 @@ class MainController():
                         name = names[best_match_index]
                 except:
                     pass
-
             face_names.append(name)
         
         for (top, right, bottom, left), name in zip(face_locations, face_names):
-            # Scale back up face locations since the frame we detected in was scaled to 1/4 size
             top *= 4
             right *= 4
             bottom *= 4
@@ -346,6 +347,7 @@ class MainController():
         else:
             return None, None
         
+
     def estimate_pose(self,some_image, index):
         results = None
         some_image.flags.writeable = False
@@ -376,38 +378,21 @@ class MainController():
 
                         x, y = int(lm.x * img_w), int(lm.y * img_h)
 
-                        # Get the 2D Coordinates
                         face_2d.append([x, y])
-
-                        # Get the 3D Coordinates
                         face_3d.append([x, y, lm.z])       
                 
-                # Convert it to the NumPy array
                 face_2d = np.array(face_2d, dtype=np.float64)
-
-                # Convert it to the NumPy array
                 face_3d = np.array(face_3d, dtype=np.float64)
 
-                # The camera matrix
                 focal_length = 1 * img_w
-
                 cam_matrix = np.array([ [focal_length, 0, img_h / 2],
                                         [0, focal_length, img_w / 2],
                                         [0, 0, 1]])
 
-                # The Distance Matrix
                 dist_matrix = np.zeros((4, 1), dtype=np.float64)
-
-                # Solve PnP
                 success, rot_vec, trans_vec = cv2.solvePnP(face_3d, face_2d, cam_matrix, dist_matrix)
-
-                # Get rotational matrix
                 rmat, jac = cv2.Rodrigues(rot_vec)
-
-                # Get angles
                 angles, mtxR, mtxQ, Qx, Qy, Qz = cv2.RQDecomp3x3(rmat)
-
-                # Get the y rotation degree
                 x = angles[0] * 360
                 y = angles[1] * 360
                 x = '%.3f'%(x)
@@ -415,6 +400,7 @@ class MainController():
 
                 return tuple([x, y])
     
+
     def estimate_direction(self,pose_estimate):
         if float(pose_estimate[0]) > -20 and float(pose_estimate[0]) < 20 and float(pose_estimate[1]) > -20 and float(pose_estimate[1]) < 20:
             return "Straight"
@@ -423,10 +409,12 @@ class MainController():
         elif float(pose_estimate[0]) > -20 and float(pose_estimate[0]) < 20 and float(pose_estimate[1]) > 10:
             return "Left"
     
+
     def learn_new_face(self):
         face_encodings = face_recognition.face_encodings(self.register_image)[0]
         self.model.new_face_encoding_temp = [face_encodings]
         
+
     def take_pic(self,cam,x,y):
         success, image = cam.read()
         image = image[0:x, 0:y]
@@ -434,6 +422,7 @@ class MainController():
         image = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
         return image
     
+
     def capture_frames(self):
         yMain = 560 if logging.root.level == logging.INFO else 360
         if not self.args.train_from_source:
@@ -441,14 +430,13 @@ class MainController():
             self.side_image = self.take_pic(self.side_camera,240,240)
             self.register_image = self.side_image
         else:
-            #self.main_image = cv2.imread(f"/home/dartiukhov/Desktop/thesis_clean/thesis/{folder}/set2/{light}_color/{distance}_{pose}2_c.jpg")
-            #self.side_image = cv2.imread(f"/home/dartiukhov/Desktop/thesis_clean/thesis/{folder}/set2/{light}_color/{distance}_{pose}1_c.jpg")
-            self.main_image = cv2.imread(f"/home/dartiukhov/Desktop/thesis_clean/thesis/{folder}/set1/{person}_{light}_c.jpg")
-            self.side_image = cv2.imread(f"/home/dartiukhov/Desktop/thesis_clean/thesis/{folder}/set1/{person}_{light}_c.jpg")
-            self.register_image = cv2.imread(f"/home/dartiukhov/Desktop/thesis_clean/thesis/{folder}/set1/{person}_{light}_c.jpg")
+            self.main_image = cv2.imread(path_to_main_image)
+            self.side_image = cv2.imread(path_to_side_image)
+            self.register_image = cv2.imread(path_to_register_image)
         self.display_pic(self.view_idle.main_camera_label,self.main_image)
         self.display_pic(self.view_idle.side_camera_label,self.side_image)
         self.display_pic(self.view_register.side_camera_label,self.register_image)
+
 
     def display_pic(self,label,image):
         image1 = Image.fromarray(image)
